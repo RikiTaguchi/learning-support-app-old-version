@@ -1,0 +1,373 @@
+@charset "utf-8";
+
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1;
+    background-color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* main */
+main {
+    color: #000000;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+.main-inner {
+    width: 60%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main h1 {
+    font-size: 32px;
+    margin-top: 40px;
+}
+
+.main-info-account {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-info-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-info-form-text {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.main-info-form div input {
+    width: 300px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-color: gray;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-info-button {
+    height: 40px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-info-button button {
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+    border-color: black;
+}
+
+.main-info-button p {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: black;
+}
+
+.main-info-account-delete {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.delete-text {
+    font-size: 18px;
+    height: 40px;
+    background-color: #ff69b4;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+    border-color: black;
+}
+
+.delete-text p {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+table tr td form button p {
+    color: #000000;
+}
+
+.main-msg-finish {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    width: 80%;
+}
+
+.msg {
+    margin-top: 120px;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    color: black;
+}
+
+.msg-link {
+    margin-top: 25px;
+    color: black;
+}
+
+.make-link-button {
+    color: black;
+}
+
+.main-edit-memo {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.main-edit-memo-text {
+    width: 400px;
+    height: 250px;
+    background-color: white;
+    border-color: gray;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-edit-memo-button button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+    border-color: black;
+    margin-top: 40px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    color: black;
+}
+
+.main-edit-memo-button-delete button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    background-color: #ff69b4;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+    border-color: black;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    color: black;
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    main {
+        padding-top: 60px;
+    }
+
+    .main-inner {
+        width: 86%;
+        margin-top: 30px;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+
+    .main-title-feedback {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 45px;
+    }
+    
+    .main-title-mybook {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 70px;
+    }
+    
+    .main-table-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-feedback-table {
+        margin-top: 25px;
+    }
+    
+    .main-mybook-table {
+        margin-top:25px;
+        margin-bottom: 70px;
+    }
+    
+    .main-table-button-blue form button p {
+        color: blue;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .main-table-button-blue {
+        background-color: #f2f2f2;
+        border: none;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+    
+    .main-table-button-red {
+        background-color: #f2f2f2;
+        border: none;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    .main-table-button-red form button p {
+        color: red;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    table {
+        margin-left: 30px;
+        border-collapse: collapse;
+    }
+    
+    .main-table-element {
+        background-color: #e0e0e0;
+        border-collapse: collapse;
+        border: solid 1px;
+    }
+    
+    td {
+        font-size: 15px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: auto;
+    }
+    
+    th {
+        font-size: 25px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: auto;
+    }
+    
+    table tr td form button p {
+        color: #000000;
+    }
+
+    .main h1 {
+        font-size: 24px;
+        margin-top: 30px;
+    }
+    
+    .main-info-account {
+        margin-top: 10px;
+    }
+    
+    .main-info-form-text {
+        font-size: 16px;
+        margin-top: 16px;
+    }
+    
+    .main-info-form div input {
+        width: 250px;
+        height: 30px;
+    }
+    
+    .main-info-button {
+        height: 40px;
+        margin-top: 30px;
+    }
+    
+    .main-info-button button {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .main-info-button p {
+        font-size: 18px;
+        display: block;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    
+    .main-info-account-delete {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+    }
+    
+    .delete-text {
+        font-size: 18px;
+        height: 40px;
+    }
+
+    .main-edit-memo-text {
+        width: 250px;
+        height: 180px;
+    }
+}

@@ -1,0 +1,499 @@
+@charset "utf-8";
+
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1;
+    background-color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* main */
+main {
+    color: #000000;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 90px;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+.main-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    margin-top: 45px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main-inner-mybook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.main-table-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.main-table-th {
+    font-size: 25px;
+}
+
+.main-table-th-button {
+    width: 120px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.main-table-th-button form button {
+    background-color: #ff69b4;
+    color: black;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    width: 100%;
+}
+
+.main-table-th-button form button p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main-table-new {
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.main-table-new input {
+    width: 160px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    color: black;
+}
+
+.main-table-new-button {
+    width: 120px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.main-table-new-button button {
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    color: black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.main-table-new-button button p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.main-table-element {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main-table-element input {
+    width: 160px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    color: black;
+}
+
+.main-table-element-change button p {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.main-table-element-change button {
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-table-element-change {
+    width: 60px;
+}
+
+.main-table-element-delete button p {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.main-table-element-delete button {
+    background-color: #ff69b4;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-table-element-delete {
+    width: 60px;
+}
+
+table tr td form button p {
+    color: #000000;
+}
+
+.main-inner-form-index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+.main-inner-add-index {
+    width: 100%;
+}
+
+.new_index {
+    width: 90%;
+    height: 200px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.index_add {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: black;
+    background-color: lightskyblue;
+    border-color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-inner-add-title {
+    font-size: 25px;
+    font-weight: bold;
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-inner-form-text {
+    display: block;
+    font-size: 15px;
+    margin-top: 45px;
+    margin-bottom: 30px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.main-inner-form-change {
+    margin-top: 40px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-inner-change-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.main-inner-bookname-change {
+    margin-top: 10px;
+    width: 75%;
+    height: 40px;
+    background-color: white;
+    border-color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.bookname_change {
+    width: 20%;
+    margin-left: 5%;
+    height: 35px;
+    background-color: lightskyblue;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-inner-change-bookname {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-divide-area {
+    width: 85%;
+    color: black;
+    margin-top: 40px;
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    main {
+        color: #000000;
+        background-color: #f2f2f2;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 60px;
+    }
+
+    .main-inner {
+        width: 86%;
+        margin-top: 30px;
+    }
+    
+    .main-inner-mybook {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+    
+    .main-table-inner {
+        margin-top: 40px;
+    }
+    
+    table {
+        border-collapse: collapse;
+    }
+    
+    td {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    
+    .main-table-th {
+        font-size: 15px;
+    }
+    
+    .main-table-th-button {
+        width: 40%;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    
+    .main-table-th-button form button p {
+        font-size: 9px;
+    }
+    
+    .main-table-new {
+        font-size: 10px;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    
+    .main-table-new input {
+        width: 80px;
+        height: 30px;
+    }
+    
+    .main-table-new-button {
+        width: 40%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    
+    .main-table-new-button button {
+        border-radius: 5px;
+        width: 85%;
+    }
+
+    .main-table-th-button form button {
+        border-radius: 5px;
+        width: 85%;
+    }
+    
+    .main-table-new-button button p {
+        font-size: 10px;
+        font-weight: bold;
+        color: #000000;
+    }
+    
+    .main-table-element {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .main-table-element input {
+        width: 80px;
+        height: 30px;
+    }
+    
+    .main-table-element-change button p {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    
+    .main-table-element-change button {
+        border-radius: 5px;
+        width: 85%;
+    }
+    
+    .main-table-element-change {
+        width: 20%;
+    }
+    
+    .main-table-element-delete button p {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    
+    .main-table-element-delete button {
+        border-radius: 5px;
+        width: 85%;
+    }
+
+    .main-table-element-delete {
+        width: 20%;
+    }
+    
+    table tr td form button p {
+        color: #000000;
+    }
+    
+    .new_index {
+        width: 90%;
+        height: 130px;
+        margin-top: 5px;
+    }
+    
+    .index_add {
+        height: 32px;
+        margin-top: 5px;
+        font-size: 15px;
+    }
+    
+    .main-inner-add-title {
+        font-size: 20px;
+        width: 90%;
+    }
+
+    .main-inner-add-index {
+        width: 100%;
+    }
+    
+    .main-inner-form-text {
+        font-size: 12px;
+        margin-top: 30px;
+    }
+
+    .main-inner-form-change {
+        width: 90%;
+    }
+    
+    .main-inner-change-title {
+        font-size: 20px;
+    }
+    
+    .main-inner-bookname-change {
+        height: 32px;
+    }
+    
+    .bookname_change {
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .main-inner-form-index  {
+        width: 90%;
+    }
+
+    .main-inner-change-bookname {
+        width: 90%;
+    }
+}

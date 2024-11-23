@@ -1,0 +1,368 @@
+@charset "utf-8";
+
+/* デフォルト設定 */
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1;
+    background-color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* main */
+main {
+    color: #000000;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 90px;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+.main-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.main-form-inner {
+    font-size: 35px;
+    margin-top: 10px;
+}
+
+.main-form-inner p {
+    margin-top: 20px;
+}
+
+.main-form-inner p:nth-child(5) {
+    margin-top: 15px;
+}
+
+.main-form-book,
+.main-form-start,
+.main-form-end,
+.main-form-number {
+    width: 180px;
+    height: 35px;
+    border-radius: 10px;
+    border-color: gray;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: white;
+}
+
+.main-form-book {
+    margin-left: -12px;
+}
+
+.main-form-style {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-form-style-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-form-style-inner span:nth-child(2) {
+    margin-top: 10px;
+}
+
+.main-form-style-inner span input{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.main-form-submit input{
+    font-size: 30px;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    color: black;
+    font-weight: bold;
+}
+
+.main-return {
+    font-size: 22px;
+    margin-top: 60px;
+    margin-bottom: 70px;
+}
+
+.info_account {
+    display: none;
+}
+
+.main-feedback-form-input {
+    display: inline-block;
+    width: 180px;
+    height: 35px;
+    border-color: gray;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-feedback-form-input-outline {
+    display: inline-block;
+    margin-top: -15px;
+}
+
+.main-feedback-form {
+    display: flex;
+    align-items: center;
+}
+
+.main-form-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.main-form-apikey {
+    width: 400px;
+    height: 35px;
+    background-color: white;
+    border-color: gray;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-form-text {
+    width: 400px;
+    height: 200px;
+    margin-top: 10px;
+    background-color: white;
+    border-color: gray;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-form-inform {
+    font-size: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 72%;
+    margin-bottom: 50px;
+}
+
+.main-inner-button1-index {
+    color: black;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    width: 60px;
+    height: 25px;
+}
+
+.main-inner-button2-index {
+    color: black;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    width: 60px;
+    height: 25px;
+}
+
+.main-inner-list-index {
+    display: block;
+    width: 300px;
+    background-color: #797979;
+    box-shadow: 0 0 10px 5px lightskyblue;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.element-index {
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.book-id {
+    display: none;
+}
+
+.main-inner-list-book {
+    padding: 15px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.list-title {
+    font-size: 25px;
+}
+
+.list-element {
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.list-element2 {
+    white-space: pre-wrap;
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    main {
+        padding-top: 60px;
+    }
+
+    .main-inner {
+        margin-top: 30px;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+
+    .main-title {
+        font-size: 30px;
+        margin-top: 30px;
+    }
+
+    .main-form-inner {
+        font-size: 25px;
+        margin-top: 0px;
+    }
+
+    .main-form-inner p {
+        margin-top: 20px;
+    }
+
+    .main-form-inner p:nth-child(5) {
+        margin-top: 15px;
+    }
+
+    .main-form-book,
+    .main-form-start,
+    .main-form-end,
+    .main-form-number {
+        width: 120px;
+        height: 30px;
+    }
+
+    .main-form-book {
+        margin-left: -8px;
+    }
+
+    .main-form-style-inner span {
+        font-size: 20px;
+    }
+
+    .main-form-style-inner span input{
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+    }
+
+    .main-form-submit input{
+        font-size: 20px;
+        width: 70%;
+        margin-top: 10px;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-bottom: 30px;
+    }
+
+    .main-return {
+        font-size: 20px;
+        margin-top: 60px;
+        margin-bottom: 70px;
+    }
+
+    .title-mybook {
+        font-size: 18px;
+    }
+
+    .main-form-title {
+        font-size: 20px;
+    }
+    
+    .main-form-apikey {
+        width: 270px;
+        height: 30px;
+        margin-top: 5px;
+    }
+    
+    .main-form-text {
+        width: 270px;
+        height: 160px;
+        margin-top: 5px;
+    }
+
+    .main-form-inform {
+        font-size: 12px;
+        width: 85%;
+    }
+
+    .main-inner-list-index {
+        width: 200px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    .main-inner-list-book {
+        padding: 10px;
+        max-height: 150px;
+    }
+
+    .element-index {
+        font-size: 8px;
+    }
+
+    .list-title {
+        font-size: 15px;
+    }
+    
+    .list-element {
+        font-size: 13px;
+        margin-top: 8px;
+    }
+}

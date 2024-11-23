@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1;
+    background-color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* main */
+main {
+    color: #000000;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+.main-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 45px;
+    margin-bottom: 40px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main form p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.main-form-input {
+    width: 250px;
+    height: 35px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-back {
+    font-size: 15px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.main-make-button {
+    font-size: 25px;
+    font-weight: bold;
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    color: black;
+    display: block;
+    width: 200px;
+}
+
+.main-form-make {
+    margin-top: 40px;
+    width: 175px;
+    display: flex;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.main-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.error-button {
+    margin-top: 20px;
+    color: black;
+}
+
+.msg {
+    margin-top: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    color: black;
+}
+
+.main-account-finish {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    main {
+        padding-top: 60px;
+    }
+
+    .main-inner {
+        width: 86%;
+        margin-top: 30px;
+    }
+}

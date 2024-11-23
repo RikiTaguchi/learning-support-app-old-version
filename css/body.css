@@ -1,0 +1,11 @@
+body {
+    font-family: "ＭＳ 明朝", sans-serif;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+    touch-action: manipulation;
+}
+
+input {
+    font-size: 17px;
+}

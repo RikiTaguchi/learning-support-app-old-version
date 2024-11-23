@@ -1,0 +1,626 @@
+@charset "utf-8";
+
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1;
+    background-color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* main */
+main {
+    position: relative;
+    color: #000000;
+    background-image: url(../images/note.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 90px;
+}
+
+.main-title-feedback {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.main-title-mybook {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.main-table-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+}
+
+.main-feedback-table {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.main-mybook-table {
+    margin-top:25px;
+    margin-bottom: 25px;
+}
+
+.main-table-button-blue form button p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-table-button-blue {
+    padding-left: 30px;
+    padding-right: 15px;
+}
+
+.main-table-button-red {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.main-table-button-red form button p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-table-element {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+td {
+    font-size: 25px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: auto;
+}
+
+th {
+    font-size: 25px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: auto;
+}
+
+table tr td form button p {
+    color: #000000;
+}
+
+.main-table-button-blue form button {
+    background-color: lightskyblue;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-table-button-red form button {
+    background-color: #ff69b4;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.title1 {
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.title2 {
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.title3 {
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+    color: black;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-msg-p {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.main-memo {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fffef6;
+}
+
+.main-memo-title {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.main-memo-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+.main-memo-area-button {
+    width: 50%;
+    display: flex;
+    margin-bottom: 25px;
+    justify-content: space-evenly;
+}
+
+.main-memo-button1 button {
+    background-color: #ff69b4;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-memo-button2 button {
+    background-color: lightskyblue;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+}
+
+.main-memo-button1 button p {
+    font-size: 20px;
+    font-weight: bold;
+    width: 100px;
+}
+
+.main-memo-button2 button p {
+    font-size: 20px;
+    font-weight: bold;
+    width: 100px;
+}
+
+.main-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main-countdown-block1 {
+    display: flex;
+    margin-top: 20px;
+    color: black;
+    align-items: flex-end;
+}
+
+.main-countdown-block2 {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.main-countdown-text1 {
+    font-size: 25px;
+    font-weight: bold;
+    display: block;
+    margin-right: 2px;
+}
+
+.main-countdown-text2 {
+    font-size: 20px;
+    display: block;
+    margin-left: 2px;
+}
+
+.main-countdown-text3 {
+    font-size: 20px;
+}
+
+.main-countdown-text4 {
+    color: red;
+    font-size: 80px;
+    font-weight: bold;
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-countdown-text5 {
+    font-size: 20px;
+}
+
+.main-countdown-text6 {
+    display: block;
+    margin-top: 20px;
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.main-countdown-area-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main-countdown-button button {
+    background-color: lightskyblue;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    width: 100px;
+}
+
+.main-countdown-button button p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main-table-block1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main-table-block2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #fffef6;
+}
+
+.main-mybook-button-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-mybook-button-add-button {
+    background-color: lightskyblue;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.main-msg-nobook {
+    font-size: 25px;
+}
+
+.main-notice {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px 1px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fffef6;
+}
+
+.main-notice-title {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.main-notice-list {
+    width: 90%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.main-notice-list-block {
+    width: 95%;
+    margin-top: 20px;
+}
+
+.main-notice-list-subblock {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-notice-subtitle {
+    display: block;
+    width: 60%;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.main-notice-date {
+    display: block;
+    margin: 5px;
+    font-size: 15px;
+    color: red;
+}
+
+.main-notice-detail-root {
+    margin-left: 5%;
+    font-size: 15px;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 1px gray;
+    background-color: #e0e0e0;
+    width: 92%;
+    height: 90px;
+    overflow: scroll;
+    margin-bottom: 20px;
+}
+
+.main-notice-button-root {
+    display: block;
+    margin: 5px;
+    background-color: lightskyblue;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 3px 3px 5px 1px gray;
+    font-weight: bold;
+}
+
+.main-notice-line {
+    display: block;
+    width: 88%;
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    main {
+        padding-top: 60px;
+    }
+    
+    .main-table-button-blue form button p {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .main-table-button-blue {
+        border: none;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+    
+    .main-table-button-red {
+        border: none;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    .main-table-button-red form button p {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .main-table-element {
+        background-color: #e0e0e0;
+        font-size: 10px;
+    }
+    
+    td {
+        font-size: 15px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: auto;
+    }
+    
+    th {
+        font-size: 25px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: auto;
+    }
+    
+    table tr td form button p {
+        color: #000000;
+    }
+
+    .main-memo {
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+
+    .main-memo-title {
+        margin-top: 20px;
+    }
+    
+    .main-memo-element {
+        font-size: 15px;
+    }
+    
+    .main-memo-area-button {
+        width: 75%;
+    }
+    
+    .main-memo-button1 button p {
+        font-size: 15px;
+        width: 65px;
+    }
+    
+    .main-memo-button2 button p {
+        font-size: 15px;
+        width: 65px;
+    }
+
+    .main-countdown {
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+        margin-top: 30px;
+    }
+    
+    .main-countdown-text1 {
+        font-size: 25px;
+    }
+    
+    .main-countdown-text2 {
+        font-size: 15px;
+    }
+    
+    .main-countdown-text3 {
+        font-size: 15px;
+    }
+    
+    .main-countdown-text4 {
+        font-size: 60px;
+    }
+    
+    .main-countdown-text5 {
+        font-size: 15px;
+    }
+
+    .main-countdown-text6 {
+        font-size: 15px;
+    }
+
+    .main-countdown-button button {
+        width: 70px;
+    }
+
+    .main-countdown-button button p {
+        font-size: 15px;
+    }
+
+    .main-table-block1 {
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+
+    .main-table-block2 {
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+    
+    .main-mybook-button-add-button {
+        font-size: 15px;
+        width: 75px;
+    }
+
+    .main-msg-nobook {
+        font-size: 15px;
+    }
+
+    .main-notice {
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+    
+    .main-notice-title {
+        margin-top: 20px;
+    }
+
+    .main-notice-list {
+        margin-top: 10px;
+    }
+    
+    .main-notice-subtitle {
+        width: 50%;
+        font-size: 13px;
+    }
+    
+    .main-notice-date {
+        font-size: 10px;
+    }
+    
+    .main-notice-detail-root {
+        font-size: 15px;
+        height: 90px;
+    }
+    
+    .main-notice-button-root {
+        font-size: 10px;
+    }
+}
