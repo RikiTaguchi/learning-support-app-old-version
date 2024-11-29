@@ -336,4 +336,3 @@ function feedback6($level, $answer) {
     }
     return $result;
 }
-?>

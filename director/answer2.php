@@ -1,9 +1,8 @@
 <?php
 include('./source2.php');
 
-$db_id = $_GET['db_id'];
 $book_name = $_GET['book_name'];
-$db_name = $_GET['db_name'];
+$table_name = $_GET['table_name'];
 $start = $_GET['start'];
 $end = $_GET['end'];
 $questions_num = $_GET['questions_num'];
@@ -21,15 +20,15 @@ for ($i = 1; $i <= $questions_num; $i++) {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_' . $db_id . ';charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     foreach ($number as $n) {
-        $sql = 'SELECT * FROM ' . $db_name . ' WHERE id = ' . $n;
+        $sql = 'SELECT * FROM ' . $table_name . ' WHERE id = ' . $n;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $words[] = $result['word'];
         $answers[] = $result['answer'];
-        if ($db_name == 'Vintage') {
+        if ($table_name == 'Vintage') {
             $select1[] = $result['select1'];
             $select2[] = $result['select2'];
             $select3[] = $result['select3'];
@@ -67,7 +66,7 @@ try {
             echo '<div class = "header-inner-menu">' . PHP_EOL;
             echo '<p class = "header-inner-menu-title">' . $book_name . ' / #' . $start . '~' . $end . ' / ' . $questions_num . '題</p>'. PHP_EOL;
             echo '<div class = "header-inner-menu-button">';
-            echo '<form method = "post" action = "question2.php?db_id=' . $db_id . '&book_name=' . $book_name . '&db_name=' . $db_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
+            echo '<form method = "post" action = "question2.php?db_id=' . $db_id . '&book_name=' . $book_name . '&table_name=' . $table_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
             for ($i = 1; $i <= $questions_num; $i++) {
                 echo 'data' . $i . '=' . $number[$i - 1];
                 if ($i < $questions_num) {

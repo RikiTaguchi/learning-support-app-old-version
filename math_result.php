@@ -56,9 +56,7 @@ $finish_time_s = $_POST['finish_time_s'];
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
 
         <main class = "main">
@@ -98,9 +96,7 @@ $finish_time_s = $_POST['finish_time_s'];
         </main>
 
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

@@ -119,4 +119,3 @@ function check_sqrt($num) {
     }
     return $check;
 }
-?>

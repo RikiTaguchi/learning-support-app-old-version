@@ -29,9 +29,6 @@
                 make_link('英文解析', 'form5.php', [$user_name, $login_id, $user_pass]);
                 echo '</li>';
                 echo '<li>';
-                make_link('英作文添削', 'form6.php', [$user_name, $login_id, $user_pass]);
-                echo '</li>';
-                echo '<li>';
                 make_link('スタンプカード', 'detail_stamp.php', [$user_name, $login_id, $user_pass]);
                 echo '</li>';
                 echo '<li>';

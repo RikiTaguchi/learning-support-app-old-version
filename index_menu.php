@@ -282,14 +282,19 @@
             <p class = "book-id">15</p>
             <h2 class = "list-title">みるみる古文単語300</h2>
             <p class = "list-element">
-                <!-- 目次入力 -->
+                読解必修語 #1~50<br>
+                入試必修語 #51~150<br>
+                入試重要語 #151~250<br>
+                入試攻略語 251~300<br>
             </p>
         </li>
         <li class = "index-16 element-index" style="display: none;">
             <p class = "book-id">16</p>
             <h2 class = "list-title">古文単語315</h2>
             <p class = "list-element">
-                <!-- 目次入力 -->
+                第1章 最重要語 #1~163<br>
+                第2章 重要語 #164~289<br>
+                第3章 敬語 #290~315<br>
             </p>
         </li>
         <li class = "index-17 element-index" style="display: none;">

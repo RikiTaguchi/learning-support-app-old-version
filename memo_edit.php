@@ -6,7 +6,7 @@ $user_memo = '';
 $edit_type = $_POST['edit_type'];
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
@@ -20,7 +20,7 @@ try {
 
 if ($edit_type == 'reset1') {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'UPDATE info_account SET memo = \'\' WHERE login_id = \'' . $login_id . '\'';
         $dbh->query($sql);
@@ -32,7 +32,7 @@ if ($edit_type == 'reset1') {
     }
 } else if ($edit_type == 'reset2') {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'UPDATE info_account SET memo = \'\' WHERE login_id = \'' . $login_id . '\'';
         $dbh->query($sql);
@@ -44,7 +44,7 @@ if ($edit_type == 'reset1') {
     }
 } else {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'UPDATE info_account SET memo = \'' . $new_memo . '\' WHERE login_id = \'' . $login_id . '\'';
         $dbh->query($sql);
@@ -54,4 +54,3 @@ if ($edit_type == 'reset1') {
         header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
     }
 }
-?>

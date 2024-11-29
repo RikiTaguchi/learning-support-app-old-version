@@ -1,7 +1,7 @@
 <?php
 include('./source.php');
 
-$db_name = $_POST['db_name'];
+$book_name = $_POST['book_name'];
 $delete_all = $_POST['delete_all'];
 if ($delete_all != 'all') {
     $n = (int)$_POST['next_number'];
@@ -14,7 +14,7 @@ if ($delete_all != 'all') {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -23,10 +23,10 @@ try {
     $table_name = $result['table_id'] . '_feedback';
 
     if ($delete_all != 'all') {
-        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $db_name . '\' AND question_number = \'' . $number[$n] . '\'';
+        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\' AND question_number = \'' . $number[$n] . '\'';
         $stmt = $dbh->query($sql);
     } else {
-        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $db_name . '\'';
+        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\'';
         $stmt = $dbh->query($sql);
     }
     
@@ -43,4 +43,3 @@ if ($delete_all == 'all') {
 } else {
     header('Location: https://wordsystemforstudents.com/feedback_next.php', true, 307);
 }
-?>

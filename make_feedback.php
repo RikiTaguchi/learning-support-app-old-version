@@ -1,7 +1,7 @@
 <?php
 include('./source.php');
 
-$db_name = $_POST['db_name'];
+$book_name = $_POST['book_name'];
 $n = (int)$_POST['next_number'];
 $questions_num = $_POST['questions_num'];
 $number = [];
@@ -19,7 +19,7 @@ try {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_name = $result['table_id'] . '_feedback';
 
-    $sql = 'SELECT * FROM ' . $table_name . ' WHERE book_name = \'' . $db_name . '\'';
+    $sql = 'SELECT * FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
@@ -29,7 +29,7 @@ try {
         }
     }
     if ($check == false) {
-        $insert_data = '\'' . $db_name . '\', ' . $number[$n];
+        $insert_data = '\'' . $book_name . '\', ' . $number[$n];
         $sql = 'INSERT INTO ' . $table_name . ' VALUE(' . $insert_data . ')';
         $stmt = $dbh->query($sql);
     }
@@ -44,4 +44,3 @@ if ($_POST['qanda'] == 'a') {
 } else {
     header('Location: https://wordsystemforstudents.com/training_next.php', true, 307);
 }
-?>

@@ -2,7 +2,7 @@
 include('./source.php');
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -10,7 +10,6 @@ try {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
     $my_list_id = $table_id . '_my_book_list';
-    $api_key = $result['api_key'];
     
     if ($login_id != '000000' && $user_pass != '569452' && $user_name != 'ゲスト') {
         $sql = 'SELECT * FROM ' . $my_list_id;
@@ -39,9 +38,7 @@ try {
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <div class = "main-inner">
@@ -53,10 +50,6 @@ try {
                     echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
                     ?>
                     <div class = "main-form-inner">
-                        <p class = "main-form-title">APIキー</p>
-                        <?php
-                        echo '<input class = "main-form-apikey" type = "text" name = "apikey" value = "' . $api_key . '" required>';
-                        ?>
                         <p class = "main-form-title">英文を入力</p>
                         <textarea class = "main-form-text" name = "text" required></textarea>
                         <p class = "main-form-submit"><input type = "submit" value = "送信"></p>
@@ -66,9 +59,7 @@ try {
             </div>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

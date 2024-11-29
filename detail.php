@@ -7,7 +7,7 @@ $my_book_id = $_POST['my_book_id'];
 $my_table_id = $table_id . '_' . $my_book_id;
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM ' . $table_id . '_my_book_list WHERE book_id = \'' . $my_book_id . '\'';
     $stmt = $dbh->query($sql);
@@ -21,7 +21,7 @@ try {
 $i = 1;
 $j = 1;
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM ' . $my_table_id;
@@ -62,9 +62,7 @@ include('./banner.php');
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <?php if ($login_id != '000000') { ?>
@@ -210,9 +208,7 @@ include('./banner.php');
             ?>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

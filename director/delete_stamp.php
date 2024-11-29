@@ -5,7 +5,7 @@ $stamp_table_id = $_POST['stamp_table_id'];
 $stamp_img_id = $_POST['stamp_img_id'];
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'UPDATE info_image SET stamp_state = \'removed\', date_limit = \'1000-01-01\' WHERE table_id = \'' . (string)$stamp_table_id . '\' AND img_id = \'' . (string)$stamp_img_id . '\'';
@@ -18,4 +18,3 @@ try {
     header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
     exit;
 }
-?>

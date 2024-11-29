@@ -12,7 +12,7 @@ if ($director_id == 'removed' || $director_pass == 'removed') {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
     $stmt = $dbh->query($sql);
@@ -50,4 +50,3 @@ try {
     header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
     exit;
 }
-?>
