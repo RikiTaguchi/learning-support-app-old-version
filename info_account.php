@@ -2,12 +2,11 @@
 include('./source.php');
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $user_api_key = $result['api_key'];
     $login_id = $result['login_id'];
     $user_pass = $result['user_pass'];
     $user_name = $result['user_name'];
@@ -36,9 +35,7 @@ include('./banner.php');
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <div class = "main-inner">
@@ -59,8 +56,6 @@ include('./banner.php');
                                 <?php echo '<input type = "text" name = "new_login_id" value = "' . $login_id . '" required>' ?>
                                 <p class = "main-info-form-text">パスワード</p>
                                 <?php echo '<input type = "text" name = "new_user_pass" value = "' . $user_pass . '" required>' ?>
-                                <p class = "main-info-form-text">APIキー(任意)</p>
-                                <?php echo '<input type = "text" name = "new_user_api_key" value = "' . $user_api_key . '">' ?>
                                 <br>
                             </div>
                             <div class = "main-info-button">
@@ -91,9 +86,7 @@ include('./banner.php');
             ?>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

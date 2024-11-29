@@ -5,14 +5,13 @@ $date_today = strtotime(date('Y-m-d'));
 $notice = [];
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $dbh = null;
     $user_name = $result['user_name'];
-    $user_api_key = $result['api_key'];
     $user_memo = $result['memo'];
     $user_countdown_title = $result['countdown_title'];
     $user_countdown_date = strtotime($result['countdown_date']);
@@ -22,7 +21,7 @@ try {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_notice';
     $stmt = $dbh->query($sql);
@@ -44,7 +43,7 @@ if ($login_id != '000000') {
     $book_id = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     $default_count = 17;
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -85,7 +84,7 @@ if ($login_id != '000000') {
     $my_book_name_list = [];
     $my_book_id_list = [];
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -160,13 +159,10 @@ include('./banner.php');
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <?php if ($login_id != '000000') { ?>
-            
             <div class = "main-countdown">
                 <?php
                 if ($user_countdown_title != '' && $user_countdown_date != strtotime('0000-00-00') && ($user_countdown_date - $date_today) / (60 * 60 * 24) >= 0) {
@@ -262,9 +258,7 @@ include('./banner.php');
                             echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                             echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
                             ?>
-
                             <input class = "info-banner" type = "text" name = "info_banner" value = "update" style = "display: none;">
-
                         </div>
                         <div class = "main-memo-button1">
                             <button type = "submit" name = "edit_type" value = "reset2">
@@ -401,9 +395,7 @@ include('./banner.php');
             ?>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

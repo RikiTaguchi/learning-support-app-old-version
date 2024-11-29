@@ -2,7 +2,7 @@
 include('./source.php');
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -33,7 +33,7 @@ if ($login_id == '' || $user_pass == '') {
 
 if ($_GET['img_extention_0'] != '') {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = 'SELECT * FROM info_image WHERE table_id = \'' . $director_table_id . '\' AND img_id = \'' . $img_id . '\'';
@@ -52,7 +52,7 @@ if ($_GET['img_extention_0'] != '') {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (count($img_extention_list) == 0) {
@@ -94,7 +94,7 @@ try {
 
 if (($date_limit - $date_today) / (60 * 60 * 24) >= 0) {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = 'INSERT INTO info_stamp (user_table_id, director_table_id, img_id, stamp_id, get_date) VALUE(\'' . $user_table_id . '\', \'' . $director_table_id . '\', \'' . $img_id . '\', \'' . $stamp_id . '\', \'' . date('Y-m-d') . '\')';
@@ -122,4 +122,3 @@ if (($date_limit - $date_today) / (60 * 60 * 24) >= 0) {
     header('Location: https://wordsystemforstudents.com/detail_stamp.php?banner=21', true, 307);
     exit;
 }
-?>

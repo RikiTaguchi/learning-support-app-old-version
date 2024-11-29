@@ -6,7 +6,7 @@ $new_date = $_POST['user_date'];
 $edit_type = $_POST['edit_type'];
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
@@ -21,7 +21,7 @@ try {
 
 if ($edit_type == 'reset') {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'UPDATE info_account SET countdown_title = \'\', countdown_date = \'0000-00-00\' WHERE login_id = \'' . $login_id . '\'';
         $dbh->query($sql);
@@ -33,7 +33,7 @@ if ($edit_type == 'reset') {
     }
 } else {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'UPDATE info_account SET countdown_title = \'' . $new_title . '\', countdown_date = \'' . $new_date . '\' WHERE login_id = \'' . $login_id . '\'';
         $dbh->query($sql);
@@ -43,4 +43,3 @@ if ($edit_type == 'reset') {
         header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
     }
 }
-?>

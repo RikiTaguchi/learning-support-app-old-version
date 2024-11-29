@@ -16,9 +16,7 @@
     <div class = "header-site-menu">
         <ul>
             <li>
-                <?php
-                echo $user_name;
-                ?>
+                <?php echo $user_name; ?>
             </li>
             <li><?php make_link('ホーム', 'index.php', [$user_name, $login_id, $user_pass]) ?></li>
             <li><?php make_link('テスト作成', 'form.php', [$user_name, $login_id, $user_pass]) ?></li>
@@ -34,9 +32,6 @@
                 echo '</li>';
                 echo '<li>';
                 make_link('英文解析', 'form5.php', [$user_name, $login_id, $user_pass]);
-                echo '</li>';
-                echo '<li>';
-                make_link('英作文添削', 'form6.php', [$user_name, $login_id, $user_pass]);
                 echo '</li>';
                 echo '<li>';
                 make_link('スタンプカード', 'detail_stamp.php', [$user_name, $login_id, $user_pass]);

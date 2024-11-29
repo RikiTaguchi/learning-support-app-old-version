@@ -212,4 +212,3 @@ function feedback1($level, $answer) {
     ';
     return $result;
 }
-?>

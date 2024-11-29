@@ -2,7 +2,7 @@
 include('./source.php');
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
@@ -31,9 +31,7 @@ try {
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <div class = "main-inner">
@@ -47,17 +45,12 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                                ?>
-                                
-                                <?php
                                 echo '<p class = "main-edit-countdown-title">タイトル</p>';
                                 echo '<input class = "main-edit-countdown-subtitle" type = "text" name = "user_title" value = "' . $user_countdown_title . '"><br>';
                                 echo '<p class = "main-edit-countdown-title">日程</p>';
                                 echo '<input class = "main-edit-countdown-subtitle" type = "date" name = "user_date" value = "' . date('Y-m-d', $user_countdown_date) . '">';
                                 ?>
-
                                 <input class = "info-banner" type = "text" name = "info_banner" value = "update" style = "display: none;">
-
                             </div>
                             <div class = "main-edit-countdown-button">
                                 <button type = "submit" name = "edit_type" value = "edit">
@@ -72,9 +65,7 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
                                 ?>
-
                                 <input class = "info-banner" type = "text" name = "info_banner" value = "update" style = "display: none;">
-
                             </div>
                             <div class = "main-edit-countdown-button-delete">
                                 <button type = "submit" name = "edit_type" value = "reset">
@@ -85,14 +76,10 @@ try {
                     </div>
                 </div>
             </div>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

@@ -8,7 +8,7 @@ $answer = $_POST['answer'];
 
 if ($state == 'new') {
     try {
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
         $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -23,7 +23,8 @@ if ($state == 'new') {
 
         $i = 0;
         $j = 0;
-        $book_name_list = ['ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', '古文単語330', 'ターゲット1400', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)'];
+        $book_name_list = ['ターゲット1400', 'ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)', 'パス単(１級)', 'ゲットスルー2600', '明光暗記テキスト(単語)', '明光暗記テキスト(文法)', 'TOEIC金のフレーズ', 'みるみる古文単語300', '古文単語315', '古文単語330'];
+        
         while ($i == 0) {
             foreach ($result as $row) {
                 if ($row == null) {
@@ -69,7 +70,7 @@ if ($state == 'new') {
 } else if ($state == 'add') {
     try {
         $table_name = $_POST['table_name'];
-        $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $insert_data = '\'' . $question . '\', \'' . $answer . '\'';
@@ -112,15 +113,11 @@ include('./banner.php');
     </head>
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
         <main class = "main">
             <div class = "main-inner">
-                <?php
-                echo '<p class = "main-inner-newbookname">' . $new_book_name . '</p>';
-                ?>
+                <?php echo '<p class = "main-inner-newbookname">' . $new_book_name . '</p>'; ?>
                 <form  class = "main-form" method = "post" action = "make_my_book.php">
                     <div class = "main-form-inner">
                         <?php
@@ -165,9 +162,7 @@ include('./banner.php');
             </div>
         </main>
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

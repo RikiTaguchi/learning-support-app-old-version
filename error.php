@@ -1,7 +1,5 @@
 <!--
-
 バナー通知コード
-
 0 = 未登録アカウント（ログイン画面）
 1 = パスワード不一致（ログイン画面）
 2 = データベース接続エラー → 再ログイン要請（ログイン画面）
@@ -44,12 +42,10 @@
 39 = フォーム入力エラー（難易度）（form10.php）
 40 = フォーム入力エラー（数値）（form10.php）
 41 = QR読み取りエラー（未ログイン）(ログイン画面)
-
 -->
 
 <?php
 $type = $_GET['type'];
-
 if ($type == '3' || $type == '9' || $type == '12') {
     $url = 'Location: https://wordsystemforstudents.com/index.php?banner=' . $type;
 } else if ($type == '0' || $type == '1' || $type == '2' || $type == '6' || $type == '13' || $type == '14' || $type == '15' || $type == '41') {
@@ -89,7 +85,5 @@ if ($type == '3' || $type == '9' || $type == '12') {
 } else {
     $url = 'Location: https://wordsystemforstudents.com/login.html?banner=13';
 }
-
 header($url, true, 307);
 exit;
-?>

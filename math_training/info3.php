@@ -433,4 +433,3 @@ function feedback3($level, $answer) {
     ';
     return $result;
 }
-?>

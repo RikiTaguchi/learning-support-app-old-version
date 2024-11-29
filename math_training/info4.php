@@ -851,4 +851,3 @@ function feedback4($level, $answer) {
     }
     return $result;
 }
-?>

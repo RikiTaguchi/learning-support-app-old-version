@@ -6,7 +6,7 @@ $user_table_id = '';
 $delete_stamp_id_set = '';
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
@@ -21,7 +21,7 @@ try {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_stamp WHERE user_table_id = \'' . $user_table_id . '\'';
@@ -61,4 +61,3 @@ try {
     header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
     exit;
 }
-?>

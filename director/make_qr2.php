@@ -1,8 +1,10 @@
 <?php
 require_once "phpqrcode/qrlib.php";
 
-$user = 'xs192380_taguchi';
-$pass = 'gon2122RK';
+$db_user = 'root';
+$db_pass = 'myrdspassword';
+$db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
+$db_name = 'wordsystemdb';
 
 $table_id = $_GET['table_id'];
 $img_id = $_GET['img_id'];
@@ -19,4 +21,3 @@ QRcode::png($get_stamp_url, $qr_path, QR_ECLEVEL_H);
 
 header('Content-Type: image/png');
 readfile($qr_path);
-?>

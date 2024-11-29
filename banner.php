@@ -60,4 +60,3 @@ if ($banner != '') {
         $banner_msg = '';
     }
 }
-?>

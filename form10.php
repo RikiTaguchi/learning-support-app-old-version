@@ -17,18 +17,13 @@ include('./banner.php');
         <script src = "./js/toggle-menu.js"></script>
         <script src = "./js/set-banner.js"></script>
     </head>
-
     <body>
         <header class = "header">
-            <?php
-            include('./header.php');
-            ?>
+            <?php include('./header.php'); ?>
         </header>
-
         <main class = "main">
             <div class = "main-inner">
                 <h1 class = "main-title">計算トレーニング</h1>
-
                 <form class = "main-inner-form" method = "post" action = "./math_training/question.php">
                     <p class = "main-inner-form-type">
                         単元　：
@@ -42,7 +37,6 @@ include('./banner.php');
                             <option value = "6">平方根(中3)</option>
                         </select>
                     </p>
-
                     <p class = "main-inner-form-level">
                         レベル：
                         <select name = "level" required>
@@ -54,12 +48,10 @@ include('./banner.php');
                             <option value = "5">Very Hard</option>
                         </select>
                     </p>
-
                     <p class = "main-inner-form-number">
                         出題数：
                         <input type = "number" name = "question_number" required>
                     </p>
-
                     <input type = "number" name = "question_count" value = 1 style = "display: none;">
                     <input type = "number" name = "question_correct" value = 0 style = "display: none;">
                     <input type = "text" name = "login_id" value = "<?php echo $login_id; ?>" style = "display: none;">
@@ -73,11 +65,8 @@ include('./banner.php');
                 </form>
             </div>
         </main>
-
         <footer class = "footer">
-            <?php
-            include('./footer.php');
-            ?>
+            <?php include('./footer.php'); ?>
         </footer>
     </body>
 </html>

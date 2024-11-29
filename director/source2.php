@@ -1,6 +1,8 @@
 <?php
-$user = 'xs192380_taguchi';
-$pass = 'gon2122RK';
+$db_user = 'root';
+$db_pass = 'myrdspassword';
+$db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
+$db_name = 'wordsystemdb';
 
 $director_id = $_POST['director_id'];
 $director_pass = $_POST['director_pass'];
@@ -19,4 +21,3 @@ function make_link($title, $url, $info) {
     ';
     echo $text_form;
 }
-?>

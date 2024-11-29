@@ -2,7 +2,7 @@
 include('./source2.php');
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_db2;charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
@@ -32,97 +32,95 @@ function check_form($book, $start, $end, $number, $limit) {
     }
 }
 
-$db_id = 'db1';
 $limit = 0;
-
 if ($_POST['book_name'] == '1') {
     $book_name = 'ターゲット1400';
-    $db_name = 'target_1400';
+    $table_name = 'target_1400';
     $limit = 1400;
 }
 else if ($_POST['book_name'] == '2') {
     $book_name = 'ターゲット1900';
-    $db_name = 'target_1900';
+    $table_name = 'target_1900';
     $limit = 1900;
 }
 else if ($_POST['book_name'] == '3') {
     $book_name = 'システム英単語';
-    $db_name = 'system_English';
+    $table_name = 'system_English';
     $limit = 2027;
 }
 else if ($_POST['book_name'] == '4') {
     $book_name = '速読英熟語(熟語)';
-    $db_name = 'rapid_Reading';
+    $table_name = 'rapid_Reading';
     $limit = 855;
 }
 else if ($_POST['book_name'] == '5') {
     $book_name = 'Vintage';
-    $db_name = 'Vintage';
+    $table_name = 'Vintage';
     $limit = 852;
 }
 else if ($_POST['book_name'] == '6') {
     $book_name = 'パス単(3級)';
-    $db_name = 'pass_3';
+    $table_name = 'pass_3';
     $limit = 1200;
 }
 else if ($_POST['book_name'] == '7') {
     $book_name = 'パス単(準２級)';
-    $db_name = 'pass_pre2';
+    $table_name = 'pass_pre2';
     $limit = 1500;
 }
 else if ($_POST['book_name'] == '8') {
     $book_name = 'パス単(２級)';
-    $db_name = 'pass_2';
+    $table_name = 'pass_2';
     $limit = 1700;
 }
 else if ($_POST['book_name'] == '9') {
     $book_name = 'パス単(準１級)';
-    $db_name = 'pass_pre1';
+    $table_name = 'pass_pre1';
     $limit = 1900;
 }
 else if ($_POST['book_name'] == '10') {
     $book_name = 'パス単(１級)';
-    $db_name = 'pass_1';
+    $table_name = 'pass_1';
     $limit = 2100;
 }
 else if ($_POST['book_name'] == '11') {
     $book_name = 'ゲットスルー2600';
-    $db_name = 'get_Through_2600';
+    $table_name = 'get_Through_2600';
     $limit = 2100;
 }
 else if ($_POST['book_name'] == '12') {
     $book_name = '明光暗記テキスト(単語)';
-    $db_name = 'meiko_original_1';
+    $table_name = 'meiko_original_1';
     $limit = 453;
 }
 else if ($_POST['book_name'] == '13') {
     $book_name = '明光暗記テキスト(文法)';
-    $db_name = 'meiko_original_2';
+    $table_name = 'meiko_original_2';
     $limit = 100;
 }
 else if ($_POST['book_name'] == '14') {
     $book_name = 'TOEIC金のフレーズ';
-    $db_name = 'gold_phrase';
+    $table_name = 'gold_phrase';
     $limit = 1000;
 }
 else if ($_POST['book_name'] == '15') {
     $book_name = 'みるみる古文単語300';
-    $db_name = 'kobun300';
+    $table_name = 'kobun300';
     $limit = 300;
 }
 else if ($_POST['book_name'] == '16') {
     $book_name = '古文単語315';
-    $db_name = 'kobun315';
+    $table_name = 'kobun315';
     $limit = 315;
 }
 else if ($_POST['book_name'] == '17') {
     $book_name = '古文単語330';
-    $db_name = 'kobun330';
+    $table_name = 'kobun330';
     $limit = 330;
 }
 else if ($_POST['book_name'] == '' || $_POST['book_name'] == 'n') {
     $book_name = 'none';
-    $db_name = 'none';
+    $table_name = 'none';
     $limit = 0;
 }
 
@@ -175,15 +173,15 @@ else {
 }
 
 try {
-    $dbh = new PDO('mysql:host=localhost;dbname=xs192380_' . $db_id . ';charset=utf8', $user, $pass);
+    $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     foreach ($number as $n) {
-        $sql = 'SELECT * FROM ' . $db_name . ' WHERE id = ' . $n;
+        $sql = 'SELECT * FROM ' . $table_name . ' WHERE id = ' . $n;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $words[] = $result['word'];
         $answers[] = $result['answer'];
-        if ($db_name == 'Vintage') {
+        if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
             $select1[] = $result['select1'];
             $select2[] = $result['select2'];
             $select3[] = $result['select3'];
@@ -222,7 +220,7 @@ try {
                 <?php
                 echo '<p class = "header-inner-menu-title">' . $book_name . ' / #' . $start . '~' . $end . ' / ' . $questions_num . '題</p>'. PHP_EOL;
                 echo '<div class = "header-inner-menu-button">';
-                    echo '<form method = "post" action = "answer2.php?db_id=' . $db_id . '&book_name=' . $book_name . '&db_name=' . $db_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
+                    echo '<form method = "post" action = "answer2.php?db_id=' . $db_id . '&book_name=' . $book_name . '&table_name=' . $table_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
                     for ($i = 1; $i <= $questions_num; $i++) {
                         echo 'data' . $i . '=' . $number[$i - 1];
                         if ($i < $questions_num) {
@@ -251,19 +249,19 @@ try {
             <?php
             for ($i = 0; $i < $questions_num; $i++) {
                 if (($i + 1) % 10 == 0) {
-                    if ($db_name == 'Vintage') {
+                    if ($table_name == 'Vintage') {
                         echo '<p class = "main-inner-word-change-sub">';
                     } else {
                         echo '<p class = "main-inner-word-change">';
                     }
                 } else {
-                    if ($db_name == 'Vintage') {
+                    if ($table_name == 'Vintage') {
                         echo '<p class = "main-inner-word-sub">';
                     } else {
                         echo '<p class = "main-inner-word">';
                     }
                 }
-                if ($db_name == 'Vintage') {
+                if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
                     if ($type[$i] == 0 or $type[$i] == 1) {
                         echo $i + 1 . '.<br>　' . $words[$i] . '<br><br>　　①' . $select1[$i] . '　②' . $select2[$i] . '　③' . $select3[$i] . '　④' . $select4[$i] . '<br><hr>';
                     } else {
