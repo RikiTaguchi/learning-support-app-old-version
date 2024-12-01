@@ -35,7 +35,7 @@ try {
         }
     } else {
         // book_nameの更新
-        $sql = 'UPDATE info_my_book_index SET book_name = \'' . $new_book_name . '\' WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND book_name = \'' . $book_name . '\'';
+        $sql = 'UPDATE info_my_book_index SET book_name = \'' . $new_book_name . '\' WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND book_name = \'' . $book_name . '\'';
         $dbh->query($sql);
         $dbh = null;
         header('Location: https://wordsystemforstudents.com/detail.php', true, 307);

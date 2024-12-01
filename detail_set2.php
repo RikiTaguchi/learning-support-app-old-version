@@ -11,7 +11,7 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // メモ欄の更新
-    $sql = 'UPDATE info_my_book_index SET memo = \'' . $new_memo . '\' WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND book_name = \'' . $book_name . '\'';
+    $sql = 'UPDATE info_my_book_index SET memo = \'' . $new_memo . '\' WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND book_name = \'' . $book_name . '\'';
     $dbh->query($sql);
     $dbh = null;
     header('Location: https://wordsystemforstudents.com/detail.php', true, 307);

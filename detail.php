@@ -4,7 +4,6 @@ include('./source.php');
 $book_name = $_POST['book_name'];
 $book_id = $_POST['book_id'];
 
-$next_question_number = 1;
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -17,7 +16,7 @@ try {
     $sql = 'SELECT * FROM info_my_book_data WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . $book_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+    $next_question_number = 1;
     foreach ($result as $row) {
         $next_question_number += 1;
     }

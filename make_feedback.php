@@ -30,7 +30,7 @@ try {
         }
     }
     if ($check == false) {
-        $insert_data = '\'' . $table_id . '\', ' . $book_id . '\', ' . $number[$n];
+        $insert_data = $table_id . ', \'' . $book_id . '\', ' . $number[$n];
         $sql = 'INSERT INTO info_feedback VALUE(' . $insert_data . ')';
         $stmt = $dbh->query($sql);
     }

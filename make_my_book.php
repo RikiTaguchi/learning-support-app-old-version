@@ -16,12 +16,11 @@ if ($state == 'new') {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
 
-        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = \'' . $table_id . '\'';
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // 既存の参考書との重複チェック
-        $book_name_list = ['ターゲット1400', 'ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)', 'パス単(１級)', 'ゲットスルー2600', '明光暗記テキスト(単語)', '明光暗記テキスト(文法)', 'TOEIC金のフレーズ', 'みるみる古文単語300', '古文単語315', '古文単語330'];
         $i = 0;
         while ($i == 0) {
             foreach ($result as $row) {
@@ -52,7 +51,7 @@ if ($state == 'new') {
         }
 
         // MyBookの追加
-        $insert_data = '\'' . $table_id . '\', \'' . (string)$book_id . '\', \'' . $new_book_name . '\', \'\'';
+        $insert_data = $table_id . ', \'' . (string)$book_id . '\', \'' . $new_book_name . '\', \'\'';
         $sql = 'INSERT INTO info_my_book_index (table_id, book_id, book_name, memo) VALUE(' . $insert_data . ')';
         $dbh->query($sql);
 
@@ -72,17 +71,17 @@ if ($state == 'new') {
         $table_id = $result['table_id'];
         
         // データの追加
-        $insert_data = '\'' . $table_id . '\', \'' . (string)$book_id . '\', \'' . $question . '\', \'' . $answer . '\'';
+        $insert_data = $table_id . ', \'' . (string)$book_id . '\', \'' . $question . '\', \'' . $answer . '\'';
         $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer) VALUE(' . $insert_data . ')';
         $dbh->query($sql);
 
         // インデックスの修正
-        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . (string)$book_id . '\'';
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . (string)$book_id . '\'';
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $i = 1;
         foreach ($result as $row) {
-            $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = \'' . $row['table_id'] . '\' AND book_id = \'' . $row['book_id'] . '\' AND question_number = \'' . $row['question_number'] . '\'';
+            $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = ' . (string)$row['table_id'] . ' AND book_id = \'' . (string)$row['book_id'] . '\' AND question_number = ' . (string)$row['question_number'];
             $dbh->query($sql);
             $i += 1;
         }
