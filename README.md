@@ -1,7 +1,7 @@
 # 学習サポートアプリ
 
 ## DB情報
-### info_account
+### info_account: 生徒アカウントの情報
 - user_name(varchar): ユーザー名
 - login_id(varchar): ログインID
 - user_pass(varchar): パスワード
@@ -10,13 +10,53 @@
 - countdown_title(varchar): カウントダウン(タイトル)
 - countdown_date(date): カウントダウン(yyyy-MM-dd)
 
-### info_director
+### info_director: 管理者アカウントの情報
 - director_id(varchar): 管理者ID
 - director_name(varchar): 管理者名
 - director_pass(varchar): パスワード
 - table_id(int): 管理者識別番号
 
-### 
+### info_feedback: 復習リストの情報
+- table_id(int): ユーザー識別番号
+- book_id(varchar): テキストID
+- question_number(int): 問題番号
+
+### info_my_book_index: My単語帳の情報(基本データ)
+- table_id(int): ユーザー識別番号
+- book_id(varchar): テキストID
+- book_name(varchar): テキスト名
+- memo(varchar): 目次内容
+
+### info_my_book_index: My単語帳の情報(単語データ)
+- table_id(int): ユーザー識別番号
+- book_id(varchar): テキストID
+- word(varchar): 問題
+- answer(varchar): 解答
+- question_number(int): 問題番号
+
+### info_notice: お知らせの情報
+- id(int): お知らせ番号
+- title(varchar): タイトル
+- date(date): 通知日(yyyy-MM-dd)
+- detail(varchar): お知らせ詳細
+
+### info_image: 管理者が登録したスタンプの情報
+- table_id(int): 管理者識別番号
+- img_id(int): スタンプID(QRコードの識別用)
+- stamp_id(varchar): スタンプID(スタンプ画像の識別用)
+- stamp_prob(varchar): 獲得率(%)
+- img_extention(varchar): スタンプ画像の拡張子
+- img_title(varchar): スタンプのタイトル
+- date_limit(date): 有効期限
+- stamp_state(varchar): スタンプ取得の可否
+
+### info_stamp: ユーザーが獲得したスタンプの情報
+- id(int): スタンプ番号
+- user_table_id(int): 獲得した生徒の識別番号
+- director_table_id(int): 作成した管理者の識別番号
+- img_id(int): スタンプの識別番号
+- stamp_id(varchar): スタンプ画像の識別番号
+- get_date(date): スタンプ獲得日時(yyyy-MM-dd)
 
 ## 通知コード（遷移先）
 - 0: 未登録アカウント（ログイン画面）
