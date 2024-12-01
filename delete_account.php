@@ -1,9 +1,6 @@
 <?php
 include('./source.php');
 
-$my_book_id = [];
-$table_name = [];
-
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -12,40 +9,39 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
-    $table_name[] = $table_id . '_my_book_list';
-    $table_name[] = $table_id . '_feedback';
 
-    $sql = 'SELECT * FROM ' . $table_name[0];
-    $stmt = $dbh->query($sql);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($result as $row) {
-        $table = $table_id . '_' . $row['book_id'];
-        $sql = 'DROP TABLE ' . $table;
-        $dbh->query($sql);
-    }
-
-    $sql = 'DROP TABLE ' . $table_name[0] . ', ' . $table_name[1];
+    // 復習リストの削除
+    $sql = 'DELETE FROM info_feedback WHERE table_id = ' . $table_id;
     $dbh->query($sql);
 
+    // MyBook(index)の削除
+    $sql = 'DELETE FROM info_my_book_index WHERE table_id = ' . $table_id;
+    $dbh->query($sql);
+
+    // MyBook(data)の削除
+    $sql = 'DELETE FROM info_my_book_data WHERE table_id = ' . $table_id;
+    $dbh->query($sql);
+
+    // アカウントの削除
     $sql = 'DELETE FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $dbh->query($sql);
 
+    // スタンプ情報の削除
     $sql = 'DELETE FROM info_stamp WHERE user_table_id = \'' . $table_id . '\'';
     $dbh->query($sql);
 
+    // スタンプ情報の更新
     $sql = 'SELECT * FROM info_stamp';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $i => $row) {
-        $sql = '';
         $sql = 'UPDATE info_stamp SET id = ' . (string)($i + 1) . ' WHERE id = ' . (string)$row['id'];
         $dbh->query($sql);
     }
 
     $dbh = null;
 
+    // Cookieの削除
     setcookie('login_id', '', time() - 30);
     setcookie('user_pass', '', time() - 30);
 

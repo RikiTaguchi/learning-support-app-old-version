@@ -4,17 +4,10 @@ include('./source.php');
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
-    $my_list_id = $table_id . '_my_book_list';
-
-    $sql = 'SELECT * FROM ' . $my_list_id;
-    $stmt = $dbh->query($sql);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
     $dbh = null;
 } catch (PDOException $e) {
     header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);

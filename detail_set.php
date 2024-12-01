@@ -2,47 +2,47 @@
 include('./source.php');
 
 $table_id = $_POST['table_id'];
-$my_book_name = $_POST['my_book_name'];
-$my_book_id = $_POST['my_book_id'];
-$set_number = $_POST['my_book_question_num'];
+$book_name = $_POST['book_name'];
+$book_id = $_POST['book_id'];
+$question_number = $_POST['question_number'];
 $new_word = $_POST['new_word'];
 $new_answer = $_POST['new_answer'];
 $word = $_POST['word'];
 $answer = $_POST['answer'];
 $set_type = $_POST['submit'];
-$my_table_id = $table_id . '_' . $my_book_id;
-$my_list_id = $table_id . '_my_book_list';
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if ($set_type == 'add') {
-        $sql = 'INSERT INTO ' . $my_table_id . ' (id, word, answer) VALUE(' . $set_number . ', \'' . $new_word . '\', \'' . $new_answer . '\')';
+    
+    if ($set_type == 'add') { // 追加
+        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer, question_number) VALUE(' . $table_id . ', \'' . $book_id . '\', \'' . $new_word . '\', \'' . $new_answer . '\', ' . $question_number . ')';
         $dbh->query($sql);
-    } else if ($set_type == 'change') {
-        $sql = 'UPDATE ' . $my_table_id . ' SET word = \'' . $new_word . '\', answer = \'' . $new_answer . '\' WHERE id = ' . $set_number;
+    } else if ($set_type == 'change') { // 更新
+        $sql = 'UPDATE info_my_book_data SET word = \'' . $new_word . '\', answer = \'' . $new_answer . '\' WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND question_number = ' . $question_number;
         $dbh->query($sql);
-    } else if ($set_type == 'delete') {
-        $sql = 'DELETE FROM ' . $my_table_id . ' WHERE id = ' . $set_number;
+    } else if ($set_type == 'delete') { // 削除
+        $sql = 'DELETE FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND question_number = ' . $question_number;
         $dbh->query($sql);
-    } else if ($set_type == 'delete_all') {
-        $sql = 'DROP TABLE IF EXISTS ' . $my_table_id;
+    } else if ($set_type == 'delete_all') { // 全削除
+        $sql = 'DELETE FROM info_my_book_index WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id;
         $dbh->query($sql);
-        $sql = 'DELETE FROM ' . $my_list_id . ' WHERE book_name = \'' . $my_book_name . '\' AND book_id = \'' . $my_book_id . '\'';
+        $sql = 'DELETE FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id;
         $dbh->query($sql);
         $dbh = null;
         header('Location: https://wordsystemforstudents.com/index.php', true, 307);
-    } else {
+    } else { // エラー
         $dbh = null;
         header('Location: https://wordsystemforstudents.com/index.php', true, 307);
     }
-    $sql = 'SELECT * FROM ' . $my_table_id;
+
+    // インデックスの修正
+    $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id;
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     $i = 1;
     foreach ($result as $row) {
-        $sql = 'UPDATE ' . $my_table_id . ' SET id = ' . (string)$i . ' WHERE id = ' . $row['id'];
+        $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND question_number = ' . (string)$row['question_number'];
         $dbh->query($sql);
         $i += 1;
     }

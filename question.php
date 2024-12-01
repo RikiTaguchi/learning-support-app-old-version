@@ -2,7 +2,7 @@
 include('./source.php');
 
 $book_name = $_GET['book_name'];
-$table_name = $_GET['table_name'];
+$book_id = $_GET['book_id'];
 $start = $_GET['start'];
 $end = $_GET['end'];
 $questions_num = $_GET['questions_num'];
@@ -22,13 +22,26 @@ for ($i = 1; $i <= $questions_num; $i++) {
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
+    $stmt = $dbh->query($sql);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $table_id = $result['table_id'];
+
+    $book_id_list = ['target_1400', 'target_1900', 'system_English', 'rapid_Reading', 'Vintage', 'pass_3', 'pass_pre2', 'pass_2', 'pass_pre1', 'pass_1', 'get_Through_2600', 'meiko_original_1', 'meiko_original_2', 'gold_phrase', 'kobun300', 'kobun315', 'kobun330'];
     foreach ($number as $n) {
-        $sql = 'SELECT * FROM ' . $table_name . ' WHERE id = ' . $n;
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (array_search($book_id, $book_id_list) == false) {
+            $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND question_number = ' . (string)$n;
+            $stmt = $dbh->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $sql = 'SELECT * FROM ' . $book_id . ' WHERE id = ' . (string)$n;
+            $stmt = $dbh->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
         $words[] = $result['word'];
         $answers[] = $result['answer'];
-        if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
+        if ($book_id == 'Vintage' || $book_id == 'meiko_original_2') {
             $select1[] = $result['select1'];
             $select2[] = $result['select2'];
             $select3[] = $result['select3'];
@@ -67,7 +80,7 @@ try {
             echo '<div class = "header-inner-menu">' . PHP_EOL;
             echo '<p class = "header-inner-menu-title">' . $book_name . ' / #' . $start . '~' . $end . ' / ' . $questions_num . '題</p>'. PHP_EOL;
             echo '<div class = "header-inner-menu-button">';
-            echo '<form method = "post" action = "answer.php?db_id=' . $db_id . '&book_name=' . $book_name . '&table_name=' . $table_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
+            echo '<form method = "post" action = "answer.php?book_name=' . $book_name . '&book_id=' . $book_id . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
             for ($i = 1; $i <= $questions_num; $i++) {
                 echo 'data' . $i . '=' . $number[$i - 1];
                 if ($i < $questions_num) {
@@ -100,19 +113,19 @@ try {
         <?php
             for ($i = 0; $i < $questions_num; $i++) {
                 if (($i + 1) % 10 == 0) {
-                    if ($table_name == 'Vintage') {
+                    if ($book_id == 'Vintage') {
                         echo '<p class = "main-inner-word-change-sub">';
                     } else {
                         echo '<p class = "main-inner-word-change">';
                     }
                 } else {
-                    if ($table_name == 'Vintage') {
+                    if ($book_id == 'Vintage') {
                         echo '<p class = "main-inner-word-sub">';
                     } else {
                         echo '<p class = "main-inner-word">';
                     }
                 }
-                if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
+                if ($book_id == 'Vintage' || $book_id == 'meiko_original_2') {
                     if ($type[$i] == 0 or $type[$i] == 1) {
                         echo $i + 1 . '.　' . str_replace('<br><br>', '<br>　　', $words[$i]) . '<br><br>　　①' . $select1[$i] . '　②' . $select2[$i] . '　③' . $select3[$i] . '　④' . $select4[$i] . '<br><hr>';
                     } else {

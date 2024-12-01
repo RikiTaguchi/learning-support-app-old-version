@@ -1,7 +1,7 @@
 <?php
 include('./source.php');
 
-$book_name = $_POST['book_name'];
+$book_id = $_POST['book_id'];
 $n = (int)$_POST['next_number'];
 $questions_num = $_POST['questions_num'];
 $number = [];
@@ -17,9 +17,10 @@ try {
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $table_name = $result['table_id'] . '_feedback';
+    $table_id = $result['table_id'];
 
-    $sql = 'SELECT * FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\'';
+    // 復習リストにデータを追加
+    $sql = 'SELECT * FROM info_feedback WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . $book_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
@@ -29,8 +30,8 @@ try {
         }
     }
     if ($check == false) {
-        $insert_data = '\'' . $book_name . '\', ' . $number[$n];
-        $sql = 'INSERT INTO ' . $table_name . ' VALUE(' . $insert_data . ')';
+        $insert_data = '\'' . $table_id . '\', ' . $book_id . '\', ' . $number[$n];
+        $sql = 'INSERT INTO info_feedback VALUE(' . $insert_data . ')';
         $stmt = $dbh->query($sql);
     }
     $dbh = null;
