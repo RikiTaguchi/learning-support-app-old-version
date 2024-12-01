@@ -45,11 +45,8 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
                                 ?>
-                                
                                 <textarea class = "main-edit-memo-text" name = "user_memo"><?php echo $user_memo; ?></textarea>
-
                                 <input class = "info-banner" type = "text" name = "info_banner" value = "update" style = "display: none;">
-
                             </div>
                             <div class = "main-edit-memo-button">
                                 <button type = "submit" name = "edit_type" value = "edit">

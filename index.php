@@ -12,6 +12,7 @@ try {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $dbh = null;
     $user_name = $result['user_name'];
+    $table_id = $result['table_id'];
     $user_memo = $result['memo'];
     $user_countdown_title = $result['countdown_title'];
     $user_countdown_date = strtotime($result['countdown_date']);
@@ -36,69 +37,39 @@ try {
 }
 
 if ($login_id != '000000') {
-    $count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    $count_list2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    $book_list = ['target_1400', 'target_1900', 'system_English', 'rapid_Reading', 'Vintage', 'pass_3', 'pass_pre2', 'pass_2', 'pass_pre1', 'pass_1', 'get_Through_2600', 'meiko_original_1', 'meiko_original_2', 'gold_phrase', 'kobun300', 'kobun315', 'kobun330'];
-    $book_list2 = ['ターゲット1400', 'ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)', 'パス単(１級)', 'ゲットスルー2600', '明光暗記テキスト(単語)', '明光暗記テキスト(文法)', 'TOEIC金のフレーズ', 'みるみる古文単語300', '古文単語315', '古文単語330'];
-    $book_id = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    $default_count = 17;
+    // 修正
+    $book_count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    $book_id_list = ['target_1400', 'target_1900', 'system_English', 'rapid_Reading', 'Vintage', 'pass_3', 'pass_pre2', 'pass_2', 'pass_pre1', 'pass_1', 'get_Through_2600', 'meiko_original_1', 'meiko_original_2', 'gold_phrase', 'kobun300', 'kobun315', 'kobun330'];
+    $book_name_list = ['ターゲット1400', 'ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)', 'パス単(１級)', 'ゲットスルー2600', '明光暗記テキスト(単語)', '明光暗記テキスト(文法)', 'TOEIC金のフレーズ', 'みるみる古文単語300', '古文単語315', '古文単語330'];
+    $default_count = count($book_id_list);
     try {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $table_id = $result['table_id'];
-        $table_name = $result['table_id'] . '_feedback';
-        $my_list_id = $table_id . '_my_book_list';
 
-        $sql = 'SELECT * FROM ' . $my_list_id;
+        // MyBookリストの取得
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $my_book_is_exist = false;
         foreach ($result as $row) {
-            $count_list[] = 0;
-            $count_list2[] = 0;
-            $book_list[] = $table_id . '_' . $row['book_id'];
-            $book_list2[] = $row['book_name'];
-            $book_id[] = $row['book_id'];
+            $book_count_list[] = 0;
+            $book_id_list[] = $row['book_id'];
+            $book_name_list[] = $row['book_name'];
+            $my_book_is_exist = true;
         }
 
-        $sql = 'SELECT * FROM ' . $table_name;
+        // 復習リストの取得
+        $sql = 'SELECT * FROM info_feedback WHERE table_id = ' . $table_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $feedback_list_is_exist = false;
         foreach ($result as $row) {
-            for ($i = 0; $i < count($book_list); $i += 1) {
-                if ($row['book_name'] == $book_list[$i]) {
-                    $count_list[$i] += 1;
+            for ($i = 0; $i < count($book_id_list); $i += 1) {
+                if ($row['book_id'] == $book_id_list[$i]) {
+                    $book_count_list[$i] += 1;
                 }
             }
-        }
-
-        $dbh = null;
-    } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
-        exit;
-    }
-
-    $my_book_name_list = [];
-    $my_book_id_list = [];
-    try {
-        $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $table_id = $result['table_id'];
-        $my_list_id = $table_id . '_my_book_list';
-
-        $sql = 'SELECT * FROM ' . $my_list_id;
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            $my_book_name_list[] = $row['book_name'];
-            $my_book_id_list[] = $row['book_id'];
+            $feedback_list_is_exist = true;
         }
 
         $dbh = null;
@@ -269,19 +240,20 @@ include('./banner.php');
                 </div>
             </div>
 
+            <!-- 修正 -->
             <div>
                 <div class = main-table-inner>
                     <div class = "main-table-block1">
                         <p class = "main-title-feedback">復習リスト</p>
                         <div class = main-feedback-table>
                             <?php
-                            if ($count_list != $count_list2) {
+                            if ($feedback_list_is_exist == true) {
                                 echo '<table>';
-                                for ($i = 0; $i < count($book_list); $i += 1) {
-                                    if ($count_list[$i] > 0) {
+                                for ($i = 0; $i < count($book_id_list); $i += 1) {
+                                    if ($book_count_list[$i] > 0) {
                                         echo '<tr>';
-                                        echo '<td class = "main-table-element title1">' . $book_list2[$i] . '</td>' . PHP_EOL;
-                                        echo '<td class = "main-table-element title2">' . $count_list[$i] . '題</td>' . PHP_EOL;
+                                        echo '<td class = "main-table-element title1">' . $book_name_list[$i] . '</td>' . PHP_EOL;
+                                        echo '<td class = "main-table-element title2">' . $book_count_list[$i] . '題</td>' . PHP_EOL;
                                         if ($i < $default_count) {
                                             $text_form = '
                                                 <td class = "main-table-button-blue">
@@ -289,7 +261,7 @@ include('./banner.php');
                                                     <input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">
                                                     <input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">
                                                     <input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">
-                                                    <input class = "info_account" type = "text" name = "book_name" value = "' . ($i + 1) . '">
+                                                    <input class = "info_account" type = "text" name = "book_id" value = "' . ($i + 1) . '">
                                                     <input class = "info_account" type = "text" name = "order" value = "1">
                                                 <button class = "make-link-button2" type = "submit">
                                                     <p>復習</p>
@@ -304,7 +276,7 @@ include('./banner.php');
                                                     <input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">
                                                     <input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">
                                                     <input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">
-                                                    <input class = "info_account" type = "text" name = "book_name" value = "' . ($book_id[$i]) . '">
+                                                    <input class = "info_account" type = "text" name = "book_id" value = "' . ($book_id_list[$i]) . '">
                                                     <input class = "info_account" type = "text" name = "order" value = "1">
                                                 <button class = "make-link-button2" type = "submit">
                                                     <p>復習</p>
@@ -320,7 +292,7 @@ include('./banner.php');
                                                 <input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">
                                                 <input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">
                                                 <input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">
-                                                <input class = "info_account" type = "text" name = "db_name" value = "' . $book_list[$i] . '">
+                                                <input class = "info_account" type = "text" name = "book_id" value = "' . $book_id_list[$i] . '">
                                                 <input class = "info_account" type = "text" name = "delete_all" value = "all">
                                                 <input class = "info-banner" type = "text" name = "info_banner" value = "delete" style = "display: none;">
                                             <button class = "make-link-button2" type = "submit">
@@ -340,25 +312,24 @@ include('./banner.php');
                             ?>
                         </div>
                     </div>
-
+                    
                     <div class = "main-table-block2">
                         <p class = "main-title-mybook">My単語帳</p>
                         <div class = main-mybook-table>
                             <?php
-                            if ($my_book_id_list != null) {
+                            if ($my_book_is_exist == true) {
                                 echo '<table>';
-                                    for ($i = 0; $i < count($my_book_name_list); $i += 1) {
+                                    for ($i = $default_count; $i < count($book_id_list); $i += 1) {
                                         echo '<tr>';
-                                        echo '<td class = "main-table-element title3">' . $my_book_name_list[$i] . '</td>';
+                                        echo '<td class = "main-table-element title3">' . $book_name_list[$i] . '</td>';
                                         $text_form = '
                                             <td class = "main-table-button-blue">
                                             <form method = "post" action = "detail.php">
                                                 <input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">
                                                 <input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">
                                                 <input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">
-                                                <input class = "info_account" type = "text" name = "table_id" value = "' . $table_id . '">
-                                                <input class = "info_account" type = "text" name = "my_book_name" value = "' . $my_book_name_list[$i] . '">
-                                                <input class = "info_account" type = "text" name = "my_book_id" value = "' . $my_book_id_list[$i] . '">
+                                                <input class = "info_account" type = "text" name = "book_name" value = "' . $book_name_list[$i] . '">
+                                                <input class = "info_account" type = "text" name = "book_id" value = "' . $book_id_list[$i] . '">
                                             <button class = "make-link-button2" type = "submit">
                                                 <p>編集する</p>
                                             </button>
@@ -387,7 +358,6 @@ include('./banner.php');
                     </div>
                 </div>
             </div>
-            
             <?php
             } else {
                 echo '<div class = "main-msg"><p class = "main-msg-p">ゲストモードでは復習機能・My単語帳機能・AIサポート機能が利用できません。</p></div>';

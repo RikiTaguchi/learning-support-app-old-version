@@ -15,21 +15,19 @@ if ($state == 'new') {
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
-        $table_name = $result['table_id'] . '_my_book_list';
 
-        $sql = 'SELECT * FROM ' . $table_name;
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = \'' . $table_id . '\'';
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $i = 0;
-        $j = 0;
+        // 既存の参考書との重複チェック
         $book_name_list = ['ターゲット1400', 'ターゲット1900', 'システム英単語', '速読英熟語(熟語)', 'Vintage', 'パス単(３級)', 'パス単(準２級)', 'パス単(２級)', 'パス単(準１級)', 'パス単(１級)', 'ゲットスルー2600', '明光暗記テキスト(単語)', '明光暗記テキスト(文法)', 'TOEIC金のフレーズ', 'みるみる古文単語300', '古文単語315', '古文単語330'];
-        
+        $i = 0;
         while ($i == 0) {
             foreach ($result as $row) {
                 if ($row == null) {
                     break;
-                } else if ($new_book_name == $row['book_name'] || in_array($new_book_name, $book_name_list)) {
+                } else if (($new_book_name == $row['book_name'] && $table_id == $row['table_id']) || in_array($new_book_name, $book_name_list)) {
                     header('Location: https://wordsystemforstudents.com/error.php?type=11', true, 307);
                     exit;
                 }
@@ -37,7 +35,9 @@ if ($state == 'new') {
             break;
         }
 
-        while ($j == 0) {
+        // book_idの生成
+        $i = 0;
+        while ($i == 0) {
             $book_id = rand(100000, 999999);
             $check_id = true;
             foreach ($result as $row) {
@@ -47,20 +47,14 @@ if ($state == 'new') {
                 }
             }
             if ($check_id == true) {
-                $insert_data = '\'' . $new_book_name . '\', \'' . $book_id . '\', \'' . '' . '\'';
-                $sql = 'INSERT INTO ' . $table_name . ' VALUE(' . $insert_data . ')';
-                $dbh->query($sql);
-
-                $table_name = $table_id . '_' . $book_id;
-                $sql = 'CREATE TABLE IF NOT EXISTS ' . $table_name . ' (
-                    id INT(11),
-                    word VARCHAR(255),
-                    answer VARCHAR(255)
-                )';
-                $dbh->query($sql);
                 break;
             }
         }
+
+        // MyBookの追加
+        $insert_data = '\'' . $table_id . '\', \'' . (string)$book_id . '\', \'' . $new_book_name . '\', \'\'';
+        $sql = 'INSERT INTO info_my_book_index (table_id, book_id, book_name, memo) VALUE(' . $insert_data . ')';
+        $dbh->query($sql);
 
         $dbh = null;
     } catch (PDOException $e) {
@@ -69,20 +63,26 @@ if ($state == 'new') {
     }
 } else if ($state == 'add') {
     try {
-        $table_name = $_POST['table_name'];
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $insert_data = '\'' . $question . '\', \'' . $answer . '\'';
-        $sql = 'INSERT INTO ' . $table_name . ' (word, answer) VALUE(' . $insert_data . ')';
+        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $table_id = $result['table_id'];
+        
+        // データの追加
+        $insert_data = '\'' . $table_id . '\', \'' . (string)$book_id . '\', \'' . $question . '\', \'' . $answer . '\'';
+        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer) VALUE(' . $insert_data . ')';
         $dbh->query($sql);
 
-        $sql = 'SELECT * FROM ' . $table_name;
+        // インデックスの修正
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . (string)$book_id . '\'';
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $i = 1;
         foreach ($result as $row) {
-            $sql = 'UPDATE ' . $table_name . ' SET id = ' . (string)$i . ' WHERE word = \'' . $row['word'] . '\' AND answer = \'' . $row['answer'] . '\'';
+            $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = \'' . $row['table_id'] . '\' AND book_id = \'' . $row['book_id'] . '\' AND question_number = \'' . $row['question_number'] . '\'';
             $dbh->query($sql);
             $i += 1;
         }
@@ -126,7 +126,7 @@ include('./banner.php');
                         echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
                         echo '<input class = "info_account" type = "text" name = "state" value = "add">';
                         echo '<input class = "info_account" type = "text" name = "new_book_name" value = "' . $new_book_name . '">';
-                        echo '<input class = "info_account" type = "text" name = "table_name" value = "' . $table_name . '">';
+                        echo '<input class = "info_account" type = "text" name = "book_id" value = "' . $book_id . '">';
                         ?>
                         <div class = "main-inner-form-input">
                             <div class = "main-inner-form-input-text">

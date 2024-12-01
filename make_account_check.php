@@ -7,12 +7,15 @@ try {
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // 既存アカウントとのログインID重複をチェック
     if ($result['login_id'] != '') {
         $dbh = null;
         header('Location: https://wordsystemforstudents.com/error.php?type=10', true, 307);
         exit;
     }
 
+    // 既存アカウントとのテーブルID重複をチェック
     $i = 0;
     $sql = 'SELECT table_id FROM info_account';
     $stmt = $dbh->query($sql);
@@ -27,30 +30,17 @@ try {
             }
         }
         if ($check_id == true) {
-            $table_name = $table_id . '_feedback';
-            $sql = 'CREATE TABLE IF NOT EXISTS ' . $table_name . ' (
-                book_name VARCHAR(255),
-                question_number INT(11)
-            )';
-            $dbh->query($sql);
-
-            $table_name = $table_id . '_my_book_list';
-            $sql = 'CREATE TABLE IF NOT EXISTS ' . $table_name . ' (
-                book_name VARCHAR(255),
-                book_id VARCHAR(255),
-                book_index VARCHAR(255)
-            )';
-            $dbh->query($sql);
             break;
         }
     }
 
+    // アカウントの追加
     $insert_data = '\'' . $user_name . '\', \'' . $login_id . '\', \'' . $user_pass . '\', \'' . $table_id . '\', \'\', \'\', \'\'';
     $sql = 'INSERT INTO info_account VALUE(' . $insert_data . ')';
     $stmt = $dbh->query($sql);
-    
     $dbh = null;
 
+    // Cookieにアカウント情報を保存
     setcookie('login_id', $login_id, time() + (60 * 60 * 24 * 60));
     setcookie('user_pass', $user_pass, time() + (60 * 60 * 24 * 60));
 

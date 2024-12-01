@@ -9,20 +9,20 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
-    $my_list_id = $table_id . '_my_book_list';
 
-    $sql = 'SELECT * FROM ' . $my_list_id;
+    // MyBookリストの取得
+    $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id;
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    $table_feedback = $table_id . '_feedback';
-    $sql = 'SELECT * FROM ' . $table_feedback;
+    // 復習リストの取得
+    $sql = 'SELECT * FROM info_feedback WHERE table_id = ' . $table_id;
     $stmt = $dbh->query($sql);
     $result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $list_feedback = [];
     foreach ($result2 as $row) {
-        if (in_array($row['book_name'], $list_feedback) == false) {
-            $list_feedback[] = $row['book_name'];
+        if (in_array($row['book_id'], $list_feedback) == false) {
+            $list_feedback[] = $row['book_id'];
         }
     }
 
@@ -127,7 +127,7 @@ include('./banner.php');
                                 ?>
                                 <?php
                                 foreach ($result as $row) {
-                                    if (in_array($table_id . '_' . $row['book_id'], $list_feedback)) {
+                                    if (in_array($row['book_id'], $list_feedback)) {
                                         echo '<option value = "' . $row['book_id'] . '">' . $row['book_name'] . '</option>';
                                     }
                                 }

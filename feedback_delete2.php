@@ -2,6 +2,7 @@
 include('./source.php');
 
 $book_name = $_POST['book_name'];
+$book_id = $_POST['book_id'];
 $delete_all = $_POST['delete_all'];
 if ($delete_all != 'all') {
     $n = (int)$_POST['next_number'];
@@ -20,13 +21,13 @@ try {
     $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $table_name = $result['table_id'] . '_feedback';
+    $table_id = $result['table_id'];
 
     if ($delete_all != 'all') {
-        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\' AND question_number = \'' . $number[$n] . '\'';
+        $sql = 'DELETE FROM info_feedback WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND question_number = ' . (string)$number[$n];
         $stmt = $dbh->query($sql);
     } else {
-        $sql = 'DELETE FROM ' . $table_name . ' WHERE book_name = \'' . $book_name . '\'';
+        $sql = 'DELETE FROM info_feedback WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
         $stmt = $dbh->query($sql);
     }
     

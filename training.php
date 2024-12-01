@@ -12,100 +12,99 @@ function check_form($book, $start, $end, $number, $limit) {
 }
 
 $limit = 0;
-
-if ($_POST['book_name'] == '1') {
+if ($_POST['book_id'] == '1') {
     $book_name = 'ターゲット1400';
-    $table_name = 'target_1400';
+    $book_id = 'target_1400';
     $limit = 1400;
 }
-else if ($_POST['book_name'] == '2') {
+else if ($_POST['book_id'] == '2') {
     $book_name = 'ターゲット1900';
-    $table_name = 'target_1900';
+    $book_id = 'target_1900';
     $limit = 1900;
 }
-else if ($_POST['book_name'] == '3') {
+else if ($_POST['book_id'] == '3') {
     $book_name = 'システム英単語';
-    $table_name = 'system_English';
+    $book_id = 'system_English';
     $limit = 2027;
 }
-else if ($_POST['book_name'] == '4') {
+else if ($_POST['book_id'] == '4') {
     $book_name = '速読英熟語(熟語)';
-    $table_name = 'rapid_Reading';
+    $book_id = 'rapid_Reading';
     $limit = 855;
 }
-else if ($_POST['book_name'] == '5') {
+else if ($_POST['book_id'] == '5') {
     $book_name = 'Vintage';
-    $table_name = 'Vintage';
+    $book_id = 'Vintage';
     $limit = 852;
 }
-else if ($_POST['book_name'] == '6') {
+else if ($_POST['book_id'] == '6') {
     $book_name = 'パス単(3級)';
-    $table_name = 'pass_3';
+    $book_id = 'pass_3';
     $limit = 1200;
 }
-else if ($_POST['book_name'] == '7') {
+else if ($_POST['book_id'] == '7') {
     $book_name = 'パス単(準２級)';
-    $table_name = 'pass_pre2';
+    $book_id = 'pass_pre2';
     $limit = 1500;
 }
-else if ($_POST['book_name'] == '8') {
+else if ($_POST['book_id'] == '8') {
     $book_name = 'パス単(２級)';
-    $table_name = 'pass_2';
+    $book_id = 'pass_2';
     $limit = 1700;
 }
-else if ($_POST['book_name'] == '9') {
+else if ($_POST['book_id'] == '9') {
     $book_name = 'パス単(準１級)';
-    $table_name = 'pass_pre1';
+    $book_id = 'pass_pre1';
     $limit = 1900;
 }
-else if ($_POST['book_name'] == '10') {
+else if ($_POST['book_id'] == '10') {
     $book_name = 'パス単(１級)';
-    $table_name = 'pass_1';
+    $book_id = 'pass_1';
     $limit = 2100;
 }
-else if ($_POST['book_name'] == '11') {
+else if ($_POST['book_id'] == '11') {
     $book_name = 'ゲットスルー2600';
-    $table_name = 'get_Through_2600';
+    $book_id = 'get_Through_2600';
     $limit = 2100;
 }
-else if ($_POST['book_name'] == '12') {
+else if ($_POST['book_id'] == '12') {
     $book_name = '明光暗記テキスト(単語)';
-    $table_name = 'meiko_original_1';
+    $book_id = 'meiko_original_1';
     $limit = 453;
 }
-else if ($_POST['book_name'] == '13') {
+else if ($_POST['book_id'] == '13') {
     $book_name = '明光暗記テキスト(文法)';
-    $table_name = 'meiko_original_2';
+    $book_id = 'meiko_original_2';
     $limit = 100;
 }
-else if ($_POST['book_name'] == '14') {
+else if ($_POST['book_id'] == '14') {
     $book_name = 'TOEIC金のフレーズ';
-    $table_name = 'gold_phrase';
+    $book_id = 'gold_phrase';
     $limit = 1000;
 }
-else if ($_POST['book_name'] == '15') {
+else if ($_POST['book_id'] == '15') {
     $book_name = 'みるみる古文単語300';
-    $table_name = 'kobun300';
+    $book_id = 'kobun300';
     $limit = 300;
 }
-else if ($_POST['book_name'] == '16') {
+else if ($_POST['book_id'] == '16') {
     $book_name = '古文単語315';
-    $table_name = 'kobun315';
+    $book_id = 'kobun315';
     $limit = 315;
 }
-else if ($_POST['book_name'] == '17') {
+else if ($_POST['book_id'] == '17') {
     $book_name = '古文単語330';
-    $table_name = 'kobun330';
+    $book_id = 'kobun330';
     $limit = 330;
 }
-else if ($_POST['book_name'] == '' || $_POST['book_name'] == 'n') {
+else if ($_POST['book_id'] == '' || $_POST['book_id'] == 'n') {
     $book_name = 'none';
-    $table_name = 'none';
+    $book_id = 'none';
     $limit = 0;
 }
 else {
-    $book_id = $_POST['book_name'];
-    $table_name = '';
+    $book_id = $_POST['book_id'];
+    $book_name = '';
     $limit = 0;
     try {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -115,31 +114,23 @@ else {
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
-        $my_list_id = $table_id . '_my_book_list';
 
-        $sql = 'SELECT * FROM ' . $my_list_id;
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            if ($row['book_id'] == $book_id) {
-                $table_name = $table_id . '_' . $book_id;
-                $db_id = 'db2';
-                $book_name = $row['book_name'];
-                break;
-            }
-        }
-
-        if ($table_name == '') {
+        if ($book_id == '') {
             header('Location: https://wordsystemforstudents.com/error.php?type=12', true, 307);
             exit;
         }
 
-        $sql = 'SELECT * FROM ' . $table_name;
+        // book_nameの取得
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id;
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $book_name = $result['book_name'];
+
+        // limitの取得
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            $limit += 1;
-        }
+        $limit = count($result);
 
         $dbh = null;
     } catch (PDOException $e) {
@@ -155,10 +146,10 @@ $key_submit = explode('(and)',$_POST['submit_order']);
 $selected = $key_submit[0];
 $selected_id = $key_submit[1];
 
-if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 1) {
+if (check_form($_POST['book_id'], $start, $end, $questions_num, $limit) == 1) {
     header('Location: https://wordsystemforstudents.com/error.php?type=18', true, 307);
     exit;
-} else if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 2) {
+} else if (check_form($_POST['book_id'], $start, $end, $questions_num, $limit) == 2) {
     header('Location: https://wordsystemforstudents.com/error.php?type=19', true, 307);
     exit;
 }
@@ -214,15 +205,15 @@ if ($login_id != '000000') {
         $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $feedback_name = $result['table_id'] . '_feedback';
+        $table_id = $result['table_id']; // table_idの取得
 
-        $sql = 'SELECT * FROM ' . $feedback_name . ' WHERE book_name = \'' . $table_name . '\'';
+        // 復習リストのチェック
+        $sql = 'SELECT * FROM info_feedback WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         $check_feedback = false;
         foreach ($result as $row) {
-            if ($number[$n] == $row['question_number']) {
+            if ($number[(int)$n] == $row['question_number']) {
                 $check_feedback = true;
                 break;
             }
@@ -238,12 +229,19 @@ if ($login_id != '000000') {
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = 'SELECT * FROM ' . $table_name . ' WHERE id = ' . $number[$n];
-    $stmt = $dbh->query($sql);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $book_id_list = ['target_1400', 'target_1900', 'system_English', 'rapid_Reading', 'Vintage', 'pass_3', 'pass_pre2', 'pass_2', 'pass_pre1', 'pass_1', 'get_Through_2600', 'meiko_original_1', 'meiko_original_2', 'gold_phrase', 'kobun300', 'kobun315', 'kobun330'];
+    if (array_search($book_id, $book_id_list) == false) {
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id  . '\' AND question_number = ' . (string)$number[(int)$n];
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        $sql = 'SELECT * FROM ' . $book_id . ' WHERE id = ' . (string)$number[(int)$n];
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     $word = $result['word'];
     $answer = $result['answer'];
-    if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
+    if ($book_id == 'Vintage' || $book_id == 'meiko_original_2') {
         $select1 = $result['select1'];
         $select2 = $result['select2'];
         $select3 = $result['select3'];
@@ -287,9 +285,9 @@ try {
                 echo '<p class = "main-inner-count">' . (string)(((int)$n) + 1) . ' / ' . $questions_num . '</p>';
                 echo '<p class = "info-bookname" style = "display: none;">' . $book_name . '</p>';
                 echo '<p class = "info-type" style = "display: none;">' . $type . '</p>';
-                if ($table_name == 'Vintage' || $table_name == 'meiko_original_2') {
+                if ($book_id == 'Vintage' || $book_id == 'meiko_original_2') {
                     echo '<div class = "main-inner-selectmenu">';
-                    if ($table_name == 'Vintage') {
+                    if ($book_id == 'Vintage') {
                         if ($type == 0) {
                             echo '<p class = "main-inner-type">Select the correct word</p>';
                         } else if ($type == 1) {
@@ -310,10 +308,8 @@ try {
                             echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                             echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                             echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                            echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                             echo '<div class = "main-inner-answer-menu-choices">';
-                            echo '<input type = "text" name = "book_name" value = "' . $_POST['book_name'] . '">';
-                            echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                            echo '<input type = "text" name = "book_id" value = "' . $_POST['book_id'] . '">';
                             echo '<input type = "number" name = "start" value = "' . $start . '">';
                             echo '<input type = "number" name = "end" value = "' . $end . '">';
                             echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -327,7 +323,7 @@ try {
                             for ($c = 0; $c < count($choices); $c += 1) {
                                 if (count($x) == 1) {
                                     $str_start = $choices[$c];
-                                    if (substr($word, 0, 1) == '(' || $table_name == 'meiko_original_2') {
+                                    if (substr($word, 0, 1) == '(' || $book_id == 'meiko_original_2') {
                                         $str_start = strtoupper(substr($str_start, 0, 1)) . substr($str_start, 1, (strlen($str_start) - 1));
                                     }
                                     $selected = $str_start . '+' . $choices[$c];
@@ -355,9 +351,8 @@ try {
                         echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                         echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                         echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                        echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                         echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                        echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                        echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                         echo '<input type = "number" name = "start" value = "' . $start . '">';
                         echo '<input type = "number" name = "end" value = "' . $end . '">';
                         echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -399,15 +394,14 @@ try {
                 }
                 
                 if ($login_id != '000000') {
-                    if ($table_name != 'Vintage' && $table_name != 'meiko_original_2') {
+                    if ($book_id != 'Vintage' && $book_id != 'meiko_original_2') {
                         if ($check_feedback == false) {
                             echo '<form class = "feedback-list" method = "post" action = "make_feedback.php">';
                                 echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                                echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                                 echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                                echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                                echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                                 echo '<input type = "number" name = "start" value = "' . $start . '">';
                                 echo '<input type = "number" name = "end" value = "' . $end . '">';
                                 echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -432,9 +426,8 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                                echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                                 echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                                echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                                echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                                 echo '<input type = "number" name = "start" value = "' . $start . '">';
                                 echo '<input type = "number" name = "end" value = "' . $end . '">';
                                 echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -461,9 +454,8 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                                echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                                 echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                                echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                                echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                                 echo '<input type = "number" name = "start" value = "' . $start . '">';
                                 echo '<input type = "number" name = "end" value = "' . $end . '">';
                                 echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -488,9 +480,8 @@ try {
                                 echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                                 echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                                 echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                                echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                                 echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                                echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                                echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                                 echo '<input type = "number" name = "start" value = "' . $start . '">';
                                 echo '<input type = "number" name = "end" value = "' . $end . '">';
                                 echo '<input type = "number" name = "order" value = "' . $order . '">';
@@ -516,14 +507,13 @@ try {
                 ?>
             </div>
             <?php
-            if ($table_name != 'Vintage' && $table_name != 'meiko_original_2') {
+            if ($book_id != 'Vintage' && $book_id != 'meiko_original_2') {
                 echo '<form class = "next-word" method = "post" action = "training_next.php">';
                     echo '<input class = "info_account" type = "text" name = "user_name" value = "' . $user_name . '">';
                     echo '<input class = "info_account" type = "text" name = "login_id" value = "' . $login_id . '">';
                     echo '<input class = "info_account" type = "text" name = "user_pass" value = "' . $user_pass . '">';
-                    echo '<input class = "info_account" type = "text" name = "db_id" value = "' . $db_id . '">';
                     echo '<input type = "text" name = "book_name" value = "' . $book_name . '">';
-                    echo '<input type = "text" name = "db_name" value = "' . $table_name . '">';
+                    echo '<input type = "text" name = "book_id" value = "' . $book_id . '">';
                     echo '<input type = "number" name = "start" value = "' . $start . '">';
                     echo '<input type = "number" name = "end" value = "' . $end . '">';
                     echo '<input type = "number" name = "order" value = "' . $order . '">';
