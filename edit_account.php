@@ -29,6 +29,7 @@ try {
     $user_name = $new_user_name;
     $user_pass = $new_user_pass;
 
+    // Cookieの保存
     setcookie('login_id', $login_id, time() + (60 * 60 * 24 * 60));
     setcookie('user_pass', $user_pass, time() + (60 * 60 * 24 * 60));
 

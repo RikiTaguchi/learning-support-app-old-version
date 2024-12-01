@@ -36,7 +36,7 @@ if ($_GET['img_extention_0'] != '') {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = 'SELECT * FROM info_image WHERE table_id = \'' . $director_table_id . '\' AND img_id = \'' . $img_id . '\'';
+        $sql = 'SELECT * FROM info_image WHERE table_id = ' . $director_table_id . ' AND img_id = ' . $img_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -56,7 +56,7 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (count($img_extention_list) == 0) {
-        $sql = 'SELECT * FROM info_image WHERE table_id = \'' . $director_table_id . '\' AND img_id = \'' . $img_id . '\'';
+        $sql = 'SELECT * FROM info_image WHERE table_id = ' . $director_table_id . ' AND img_id = ' . $img_id;
         $stmt = $dbh->query($sql);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -67,7 +67,7 @@ try {
         $date_today = strtotime(date('Y-m-d'));
     } else {
         foreach ($img_extention_list as $i => $data_extention) {
-            $sql = 'SELECT * FROM info_image WHERE table_id = \'' . $director_table_id . '\' AND img_id = \'' . $img_id . '\' AND stamp_id = \'' . (string)$i . '\'';
+            $sql = 'SELECT * FROM info_image WHERE table_id = ' . $director_table_id . ' AND img_id = ' . $img_id . ' AND stamp_id = \'' . (string)$i . '\'';
             $stmt = $dbh->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $img_probability_list[] = (int)$result['stamp_prob'];
@@ -97,7 +97,7 @@ if (($date_limit - $date_today) / (60 * 60 * 24) >= 0) {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = 'INSERT INTO info_stamp (user_table_id, director_table_id, img_id, stamp_id, get_date) VALUE(\'' . $user_table_id . '\', \'' . $director_table_id . '\', \'' . $img_id . '\', \'' . $stamp_id . '\', \'' . date('Y-m-d') . '\')';
+        $sql = 'INSERT INTO info_stamp (user_table_id, director_table_id, img_id, stamp_id, get_date) VALUE(' . $user_table_id . ', ' . $director_table_id . ', ' . $img_id . ', \'' . $stamp_id . '\', \'' . date('Y-m-d') . '\')';
         $dbh->query($sql);
 
         $sql = 'SELECT * FROM info_stamp';

@@ -28,10 +28,9 @@ try {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
     
-    $book_id_list = ['target_1400', 'target_1900', 'system_English', 'rapid_Reading', 'Vintage', 'pass_3', 'pass_pre2', 'pass_2', 'pass_pre1', 'pass_1', 'get_Through_2600', 'meiko_original_1', 'meiko_original_2', 'gold_phrase', 'kobun300', 'kobun315', 'kobun330'];
     foreach ($number as $n) {
         if (array_search($book_id, $book_id_list) == false) {
-            $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = ' . $book_id . ' AND question_number = ' . (string)$n;
+            $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND question_number = ' . (string)$n;
             $stmt = $dbh->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {

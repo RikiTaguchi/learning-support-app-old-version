@@ -27,7 +27,7 @@ try {
     $dbh->query($sql);
 
     // スタンプ情報の削除
-    $sql = 'DELETE FROM info_stamp WHERE user_table_id = \'' . $table_id . '\'';
+    $sql = 'DELETE FROM info_stamp WHERE user_table_id = ' . $table_id;
     $dbh->query($sql);
 
     // スタンプ情報の更新

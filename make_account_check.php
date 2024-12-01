@@ -35,7 +35,7 @@ try {
     }
 
     // アカウントの追加
-    $insert_data = '\'' . $user_name . '\', \'' . $login_id . '\', \'' . $user_pass . '\', \'' . $table_id . '\', \'\', \'\', \'\'';
+    $insert_data = '\'' . $user_name . '\', \'' . $login_id . '\', \'' . $user_pass . '\', ' . (string)$table_id . ', \'\', \'\', \'\'';
     $sql = 'INSERT INTO info_account VALUE(' . $insert_data . ')';
     $stmt = $dbh->query($sql);
     $dbh = null;

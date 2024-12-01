@@ -11,14 +11,14 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $user_table_id = (string)$result['table_id'];
+    $user_table_id = $result['table_id'];
 
-    $sql = 'SELECT * FROM info_stamp WHERE user_table_id = \'' . $user_table_id . '\'';
+    $sql = 'SELECT * FROM info_stamp WHERE user_table_id = ' . $user_table_id;
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $row) {
-        $sql = 'SELECT * FROM info_image WHERE table_id = \'' . (string)$row['director_table_id'] . '\' AND img_id = \'' . (string)$row['img_id'] . '\' AND stamp_id = \'' . $row['stamp_id'] . '\'';
+        $sql = 'SELECT * FROM info_image WHERE table_id = ' . (string)$row['director_table_id'] . ' AND img_id = ' . (string)$row['img_id'] . ' AND stamp_id = \'' . $row['stamp_id'] . '\'';
         $stmt = $dbh->query($sql);
         $result_stamp = $stmt->fetch(PDO::FETCH_ASSOC);
         $stamp_list[] = [(string)$result_stamp['table_id'], (string)$result_stamp['img_id'], $result_stamp['img_extention'], $result_stamp['img_title'], $row['get_date'], $row['stamp_id']];
