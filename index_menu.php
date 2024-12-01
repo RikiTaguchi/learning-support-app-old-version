@@ -316,7 +316,7 @@
                 echo '<li class = "index-' . $row['book_id'] . ' element-index" style="display: none;">';
                 echo '<p class = "book-id">' . $row['book_id'] . '</p>';
                 echo '<h2 class = "list-title">' . $row['book_name'] . '</h2>';
-                echo '<p class = "list-element list-element2">' . $row['book_index'] . '</p>';
+                echo '<p class = "list-element list-element2">' . $row['memo'] . '</p>';
                 echo '</li>';
             }
         }
