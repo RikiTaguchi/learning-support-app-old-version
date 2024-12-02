@@ -11,11 +11,16 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // メモ欄の更新
-    $sql = 'UPDATE info_my_book_index SET memo = \'' . $new_memo . '\' WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND book_name = \'' . $book_name . '\'';
-    $dbh->query($sql);
+    $sql = 'UPDATE info_my_book_index SET memo = :memo WHERE table_id = :table_id AND book_id = :book_id AND book_name = :book_name';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':memo', $new_memo, PDO::PARAM_STR);
+    $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+    $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+    $stmt->bindParam(':book_name', $book_name, PDO::PARAM_STR);
+    $stmt->execute();
     $dbh = null;
-    header('Location: https://wordsystemforstudents.com/detail.php', true, 307);
+    header('Location: detail.php', true, 307);
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }

@@ -1,9 +1,9 @@
 <?php
 // DB関連(AWS本番環境)
-$db_user = 'root';
-$db_pass = 'myrdspassword';
-$db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
-$db_name = 'wordsystemdb';
+// $db_user = 'root';
+// $db_pass = 'myrdspassword';
+// $db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
+// $db_name = 'wordsystemdb';
 
 // DB関連(ローカル環境)
 $db_user = 'root';

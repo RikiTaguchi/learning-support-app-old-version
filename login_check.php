@@ -4,8 +4,10 @@ include('./source.php');
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($login_id == $result['login_id'] && $user_pass == $result['user_pass']) {
         $user_name = $result['user_name'];
@@ -16,7 +18,7 @@ try {
             setcookie('user_pass', $user_pass, time() + (60 * 60 * 24 * 60));
         }
 
-        header('Location: https://wordsystemforstudents.com/index.php', true, 307);
+        header('Location: index.php', true, 307);
         exit;
     } else {
         $sql = 'SELECT * FROM info_account';
@@ -31,12 +33,12 @@ try {
             }
         }
         if ($check_account == true) {
-            header('Location: https://wordsystemforstudents.com/error.php?type=1', true, 307);
+            header('Location: error.php?type=1', true, 307);
         } else {
-            header('Location: https://wordsystemforstudents.com/error.php?type=0', true, 307);
+            header('Location: error.php?type=0', true, 307);
         }
     }
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }

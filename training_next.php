@@ -35,14 +35,19 @@ if ($login_id != '000000') {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
 
         // 復習リストのチェック
-        $sql = 'SELECT * FROM info_feedback WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_feedback WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $check_feedback = false;
         foreach ($result as $row) {
@@ -54,7 +59,7 @@ if ($login_id != '000000') {
 
         $dbh = null;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+        header('Location: error.php?type=2', true, 307);
         exit;
     }
 }
@@ -63,12 +68,18 @@ try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (array_search($book_id, $book_id_list) == false) {
-        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id  . '\' AND question_number = ' . (string)$number[(int)$n];
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_number';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number', $number[$n], PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     } else {
-        $sql = 'SELECT * FROM ' . $book_id . ' WHERE id = ' . (string)$number[(int)$n];
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM ' . $book_id . ' WHERE id = :id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':id', $number[$n], PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     }
     $word = $result['word'];
@@ -82,7 +93,7 @@ try {
     }
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }
 ?>

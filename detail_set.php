@@ -16,40 +16,70 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     if ($set_type == 'add') { // 追加
-        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer, question_number) VALUE(' . $table_id . ', \'' . $book_id . '\', \'' . $new_word . '\', \'' . $new_answer . '\', ' . $question_number . ')';
-        $dbh->query($sql);
+        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer, question_number) VALUES(:table_id, :book_id, :word, :answer, :question_number)';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':word', $new_word, PDO::PARAM_STR);
+        $stmt->bindParam(':answer', $new_answer, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number', $question_number, PDO::PARAM_INT);
+        $stmt->execute();
     } else if ($set_type == 'change') { // 更新
-        $sql = 'UPDATE info_my_book_data SET word = \'' . $new_word . '\', answer = \'' . $new_answer . '\' WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND question_number = ' . $question_number;
-        $dbh->query($sql);
+        $sql = 'UPDATE info_my_book_data SET word = :word, answer = :answer WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_number';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':word', $new_word, PDO::PARAM_STR);
+        $stmt->bindParam(':answer', $new_answer, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number', $question_number, PDO::PARAM_INT);
+        $stmt->execute();
     } else if ($set_type == 'delete') { // 削除
-        $sql = 'DELETE FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND question_number = ' . $question_number;
-        $dbh->query($sql);
+        $sql = 'DELETE FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_number';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number', $question_number, PDO::PARAM_INT);
+        $stmt->execute();
     } else if ($set_type == 'delete_all') { // 全削除
-        $sql = 'DELETE FROM info_my_book_index WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-        $dbh->query($sql);
-        $sql = 'DELETE FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-        $dbh->query($sql);
+        $sql = 'DELETE FROM info_my_book_index WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $sql = 'DELETE FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/index.php', true, 307);
+        header('Location: index.php', true, 307);
     } else { // エラー
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/index.php', true, 307);
+        header('Location: index.php', true, 307);
     }
 
     // インデックスの修正
-    $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+    $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $i = 1;
     foreach ($result as $row) {
-        $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\' AND question_number = ' . (string)$row['question_number'];
-        $dbh->query($sql);
+        $sql = 'UPDATE info_my_book_data SET question_number = :question_number_new WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_number_pre';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number_new', $i, PDO::PARAM_INT);
+        $stmt->bindParam(':question_number_pre', $row['question_number'], PDO::PARAM_INT);
+        $stmt->execute();
         $i += 1;
     }
 
     $dbh = null;
-    header('Location: https://wordsystemforstudents.com/detail.php', true, 307);
+    header('Location: detail.php', true, 307);
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }

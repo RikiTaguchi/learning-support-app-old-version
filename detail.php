@@ -1,33 +1,41 @@
 <?php
 include('./source.php');
 
-$book_name = $_POST['book_name'];
-$book_id = $_POST['book_id'];
-
 try {
+    $book_id = $_POST['book_id'];
+
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
 
-    $sql = 'SELECT * FROM info_my_book_data WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . $book_id . '\'';
-    $stmt = $dbh->query($sql);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+    $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $next_question_number = 1;
     foreach ($result as $row) {
         $next_question_number += 1;
     }
 
-    $sql = 'SELECT * FROM info_my_book_index WHERE table_id = \'' . $table_id . '\' AND book_id = \'' . $book_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_my_book_index WHERE table_id = :table_id AND book_id = :book_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+    $stmt->bindParam(':book_id', $book_id, PDO::PARAM_INT);
+    $stmt->execute();
     $result2 = $stmt->fetch(PDO::FETCH_ASSOC);
+    $book_name = $result2['book_name'];
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }
 
@@ -111,7 +119,7 @@ include('./banner.php');
                                     echo '<input class = "info_account" type = "text" name = "table_id" value = "' . $table_id . '">';
                                     echo '<input class = "info_account" type = "text" name = "book_name" value = "' . $book_name . '">';
                                     echo '<input class = "info_account" type = "text" name = "book_id" value = "' . $book_id . '">';
-                                    echo '<input class = "info_account" type = "text" name = "question_number" value = "' . $j . '">';
+                                    echo '<input class = "info_account" type = "text" name = "question_number" value = "' . (string)$next_question_number . '">';
                                     echo '<td class = "main-table-new">New</td>';
                                     echo '<td class = "main-table-new"><input type = "text" name = "new_word" required></td>';
                                     echo '<td class = "main-table-new"><input type = "text" name = "new_answer" required></td>';

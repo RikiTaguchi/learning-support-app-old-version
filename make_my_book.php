@@ -2,6 +2,7 @@
 include('./source.php');
 
 $new_book_name = $_POST['new_book_name'];
+$book_id = $_POST['book_id'];
 $state = $_POST['state'];
 $question = $_POST['question'];
 $answer = $_POST['answer'];
@@ -11,13 +12,18 @@ if ($state == 'new') {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
 
-        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id;
-        $stmt = $dbh->query($sql);
+        // MyBookリストの取得
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = :table_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // 既存の参考書との重複チェック
@@ -27,7 +33,7 @@ if ($state == 'new') {
                 if ($row == null) {
                     break;
                 } else if (($new_book_name == $row['book_name'] && $table_id == $row['table_id']) || in_array($new_book_name, $book_name_list)) {
-                    header('Location: https://wordsystemforstudents.com/error.php?type=11', true, 307);
+                    header('Location: error.php?type=11', true, 307);
                     exit;
                 }
             }
@@ -40,7 +46,7 @@ if ($state == 'new') {
             $book_id = rand(100000, 999999);
             $check_id = true;
             foreach ($result as $row) {
-                if ($book_id == $row['book_id']) {
+                if ((string)$book_id == $row['book_id']) {
                     $check_id = false;
                     break;
                 }
@@ -52,12 +58,16 @@ if ($state == 'new') {
 
         // MyBookの追加
         $insert_data = $table_id . ', \'' . (string)$book_id . '\', \'' . $new_book_name . '\', \'\'';
-        $sql = 'INSERT INTO info_my_book_index (table_id, book_id, book_name, memo) VALUE(' . $insert_data . ')';
-        $dbh->query($sql);
+        $sql = 'INSERT INTO info_my_book_index (table_id, book_id, book_name, memo) VALUES(:table_id, :book_id, :book_name, \'\')';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':book_name', $new_book_name, PDO::PARAM_STR);
+        $stmt->execute();
 
         $dbh = null;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+        header('Location: error.php?type=2', true, 307);
         exit;
     }
 } else if ($state == 'add') {
@@ -65,30 +75,39 @@ if ($state == 'new') {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
+
+        // 対象のMyBookを取得
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         // データの追加
-        $insert_data = $table_id . ', \'' . (string)$book_id . '\', \'' . $question . '\', \'' . $answer . '\'';
-        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer) VALUE(' . $insert_data . ')';
-        $dbh->query($sql);
-
-        // インデックスの修正
-        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . (string)$book_id . '\'';
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $i = 1;
-        foreach ($result as $row) {
-            $sql = 'UPDATE info_my_book_data SET question_number = ' . (string)$i . ' WHERE table_id = ' . (string)$row['table_id'] . ' AND book_id = \'' . (string)$row['book_id'] . '\' AND question_number = ' . (string)$row['question_number'];
-            $dbh->query($sql);
-            $i += 1;
+        if ($result == false) {
+            $question_number = 1;
+        } else {
+            $question_number = count($result) + 1;
         }
+        $sql = 'INSERT INTO info_my_book_data (table_id, book_id, word, answer, question_number) VALUES(:table_id, :book_id, :word, :answer, :question_number)';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->bindParam(':word', $question, PDO::PARAM_STR);
+        $stmt->bindParam(':answer', $answer, PDO::PARAM_STR);
+        $stmt->bindParam(':question_number', $question_number, PDO::PARAM_INT);
+        $stmt->execute();
 
         $dbh = null;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+        header('Location: error.php?type=2', true, 307);
         exit;
     }
 }

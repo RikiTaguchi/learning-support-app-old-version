@@ -7,26 +7,33 @@ try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $user_table_id = $result['table_id'];
 
-    $sql = 'SELECT * FROM info_stamp WHERE user_table_id = ' . $user_table_id;
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_stamp WHERE user_table_id = :user_table_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':user_table_id', $user_table_id, PDO::PARAM_INT);
+    $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $row) {
-        $sql = 'SELECT * FROM info_image WHERE table_id = ' . (string)$row['director_table_id'] . ' AND img_id = ' . (string)$row['img_id'] . ' AND stamp_id = \'' . $row['stamp_id'] . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_image WHERE table_id = :table_id AND img_id = :img_id AND stamp_id = :stamp_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $$row['director_table_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':img_id', $$row['img_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':stamp_id', $$row['stamp_id'], PDO::PARAM_STR);
+        $stmt->execute();
         $result_stamp = $stmt->fetch(PDO::FETCH_ASSOC);
         $stamp_list[] = [(string)$result_stamp['table_id'], (string)$result_stamp['img_id'], $result_stamp['img_extention'], $result_stamp['img_title'], $row['get_date'], $row['stamp_id']];
     }
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }
 
