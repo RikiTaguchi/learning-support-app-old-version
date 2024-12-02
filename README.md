@@ -25,7 +25,7 @@
 - book_name(varchar): テキスト名
 - memo(varchar): 目次内容
 
-### info_my_book_index: My単語帳の情報(単語データ)
+### info_my_book_data: My単語帳の情報(単語データ)
 - table_id(int): ユーザー識別番号
 - book_id(varchar): テキストID
 - word(varchar): 問題
