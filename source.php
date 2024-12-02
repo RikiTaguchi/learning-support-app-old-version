@@ -1,4 +1,6 @@
 <?php
+//githubテストbychihiro
+
 // DB関連(AWS本番環境)
 // $db_user = 'root';
 // $db_pass = 'myrdspassword';
