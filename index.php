@@ -7,17 +7,19 @@ $notice = [];
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $dbh = null;
     $user_name = $result['user_name'];
     $table_id = $result['table_id'];
     $user_memo = $result['memo'];
     $user_countdown_title = $result['countdown_title'];
     $user_countdown_date = strtotime($result['countdown_date']);
+    $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }
 
@@ -32,7 +34,7 @@ try {
         $notice[] = $row;
     }
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: error.php?type=2', true, 307);
     exit;
 }
 
@@ -42,8 +44,10 @@ if ($login_id != '000000') {
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // MyBookリストの取得
-        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id;
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = :table_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $my_book_is_exist = false;
         foreach ($result as $row) {
@@ -54,8 +58,10 @@ if ($login_id != '000000') {
         }
 
         // 復習リストの取得
-        $sql = 'SELECT * FROM info_feedback WHERE table_id = ' . $table_id;
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_feedback WHERE table_id = :table_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $feedback_list_is_exist = false;
         foreach ($result as $row) {
@@ -69,7 +75,7 @@ if ($login_id != '000000') {
 
         $dbh = null;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+        header('Location: error.php?type=2', true, 307);
         exit;
     }
 }

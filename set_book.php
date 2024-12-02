@@ -95,31 +95,39 @@ else {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = 'SELECT * FROM info_account WHERE login_id = \'' . $login_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_account WHERE login_id = :login_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $table_id = $result['table_id'];
 
         if ($book_id == '') {
-            header('Location: https://wordsystemforstudents.com/error.php?type=12', true, 307);
+            header('Location: error.php?type=12', true, 307);
             exit;
         }
 
         // book_nameの取得
-        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_my_book_index WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $book_name = $result['book_name'];
 
         // limitの取得
-        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = ' . $table_id . ' AND book_id = \'' . $book_id . '\'';
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $limit = count($result);
 
         $dbh = null;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+        header('Location: error.php?type=2', true, 307);
         exit;
     }
 }
