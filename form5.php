@@ -45,7 +45,7 @@ try {
                     ?>
                     <div class = "main-form-inner">
                         <p class = "main-form-title">英文を入力</p>
-                        <textarea class = "main-form-text" name = "text" required></textarea>
+                        <textarea class = "main-form-text" name = "text_input" required></textarea>
                         <p class = "main-form-submit"><input type = "submit" value = "送信"></p>
                         <p class = "main-form-inform">※解析には数十秒かかる場合があります。<br>※各文は改行で区切ってください。</p>
                     </div>
