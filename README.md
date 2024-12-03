@@ -16,6 +16,12 @@
 - https://www.apachefriends.org/jp/index.html
 - PCの設定でアクセスを許可しないとソフトを開けないので注意
 
+### PHPとJavaをインストール
+```
+brew install php
+brew install openjdk
+```
+
 ### 以下の手順を実行
 #### エイリアスを削除し、本物のフォルダを任意の場所にコピー(今回はdesktopに配置する)
 - Finder(Macの場合)から、/Applicationsを開く
