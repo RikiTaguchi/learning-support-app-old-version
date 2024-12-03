@@ -1,8 +1,4 @@
 <?php
-$db_user = 'root';
-$db_pass = 'myrdspassword';
-$db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
-$db_name = 'wordsystemdb';
 $login_id = $_POST['login_id'];
 $user_pass = $_POST['user_pass'];
 $user_name = $_POST['user_name'];
