@@ -12,7 +12,7 @@ try {
     $table_id = $result['table_id'];
     if ($director_pass != $result['director_pass']) {
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+        header('Location: ../error.php?type=24', true, 307);
         exit;
     }
 
@@ -23,7 +23,7 @@ try {
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 

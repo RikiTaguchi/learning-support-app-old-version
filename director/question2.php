@@ -39,7 +39,7 @@ try {
     }
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=2', true, 307);
+    header('Location: ../error.php?type=2', true, 307);
     exit;
 }
 ?>

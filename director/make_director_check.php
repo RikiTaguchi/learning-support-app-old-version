@@ -3,12 +3,12 @@ include('./source.php');
 include('../info_db_.php');
 
 if ($director_id == '' || $director_pass == '' || $director_name == '') {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 
 if ($director_id == 'removed' || $director_pass == 'removed' || $director_name == 'removed') {
-    header('Location: https://wordsystemforstudents.com/error.php?type=26', true, 307);
+    header('Location: ../error.php?type=26', true, 307);
     exit;
 }
 
@@ -21,7 +21,7 @@ try {
 
     if ($result['director_id'] != null) {
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/error.php?type=26', true, 307);
+        header('Location: ../error.php?type=26', true, 307);
         exit;
     }
 
@@ -51,9 +51,9 @@ try {
     setcookie('director_id', $director_id, time() + (60 * 60 * 24 * 60));
     setcookie('director_pass', $director_pass, time() + (60 * 60 * 24 * 60));
 
-    header('Location: https://wordsystemforstudents.com/director/login_director.html?banner=27', true, 307);
+    header('Location: login_director.html?banner=27', true, 307);
     exit;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
