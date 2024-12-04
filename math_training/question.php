@@ -33,7 +33,7 @@ $answer = $info[3];
 $answer_text = $info[4];
 
 if (strval($question_number) < 1 || strval($question_number) > 100) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=40', true, 307);
+    header('Location: ../error.php?type=40', true, 307);
     exit;
 }
 

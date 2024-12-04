@@ -3,7 +3,7 @@ include('./source.php');
 include('../info_db_.php');
 
 if ($director_id == 'removed' || $director_pass == 'removed' || $director_name == 'removed') {
-    header('Location: https://wordsystemforstudents.com/error.php?type=22', true, 307);
+    header('Location: ../error.php?type=22', true, 307);
     exit;
 }
 
@@ -19,13 +19,13 @@ try {
     
     if ($director_pass != $result['director_pass']) {
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/error.php?type=23', true, 307);
+        header('Location: ../error.php?type=23', true, 307);
         exit;
     }
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 

@@ -23,11 +23,11 @@ if ($type == '3' || $type == '9' || $type == '12') {
 } else if ($type == '20') {
     $url = 'Location: form3.php?banner=' . $type;
 } else if ($type == '22' || $type == '23' || $type == '24' || $type == '27' || $type == '28' || $type == '32') {
-    $url = 'Location: ../director/login_director.html?banner=' . $type;
+    $url = 'Location: director/login_director.html?banner=' . $type;
 } else if ($type == '26') {
-    $url = 'Location: ../director/make_director.html?banner=' . $type;
+    $url = 'Location: director/make_director.html?banner=' . $type;
 } else if ($type == '30' || $type == '31') {
-    $url = 'Location: ../director/info_director.php?banner=' . $type;
+    $url = 'Location: director/info_director.php?banner=' . $type;
 } else if ($type == '36' || $type == '37') {
     $url = 'Location: form9.php?banner=' . $type;
 } else if ($type == '38') {

@@ -13,9 +13,9 @@ try {
     $dbh->query($sql);
     $dbh = null;
 
-    header('Location: https://wordsystemforstudents.com/director/detail_stamp.php?banner=35', true, 307);
+    header('Location: detail_stamp.php?banner=35', true, 307);
     exit;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }

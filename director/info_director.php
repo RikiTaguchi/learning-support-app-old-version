@@ -21,7 +21,7 @@ if ($_POST['new_director_name'] == '') {
 }
 
 if ($director_id == '' || $director_pass == '') {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 
@@ -37,7 +37,7 @@ try {
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 

@@ -18,10 +18,10 @@ try {
     setcookie('director_id', '', time() - 30);
     setcookie('director_pass', '', time() - 30);
 
-    header('Location: https://wordsystemforstudents.com/error.php?type=32', true, 307);
+    header('Location: ../error.php?type=32', true, 307);
     exit;
 
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }

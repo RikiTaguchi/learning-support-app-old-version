@@ -39,10 +39,10 @@ if ($stamp_number === 1) {
         $dbh->query($sql);
         $dbh = null;
 
-        header('Location: https://wordsystemforstudents.com/director/detail_stamp.php?banner=34', true, 307);
+        header('Location: detail_stamp.php?banner=34', true, 307);
         exit;
     } catch (PDOException $e) {
-        header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+        header('Location: ../error.php?type=24', true, 307);
         exit;
     }
 } else {
@@ -72,11 +72,11 @@ if ($stamp_number === 1) {
             $dbh->query($sql);
             $dbh = null;
         } catch (PDOException $e) {
-            header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+            header('Location: ../error.php?type=24', true, 307);
             exit;
         }
     }
 
-    header('Location: https://wordsystemforstudents.com/director/detail_stamp.php?banner=34', true, 307);
+    header('Location: detail_stamp.php?banner=34', true, 307);
     exit;
 }

@@ -18,7 +18,7 @@ try {
         if ($row['director_id'] == $new_director_id) {
             if ($row['director_id'] != $director_id) {
                 $dbh = null;
-                header('Location: https://wordsystemforstudents.com/error.php?type=31', true, 307);
+                header('Location: ../error.php?type=31', true, 307);
                 exit;
             }
         }
@@ -34,10 +34,10 @@ try {
     setcookie('director_id', $director_id, time() + (60 * 60 * 24 * 60));
     setcookie('director_pass', $director_pass, time() + (60 * 60 * 24 * 60));
 
-    header('Location: https://wordsystemforstudents.com/error.php?type=30', true, 307);
+    header('Location: ../error.php?type=30', true, 307);
     exit;
 
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }

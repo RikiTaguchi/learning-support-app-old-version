@@ -14,13 +14,13 @@ try {
     
     if ($director_pass != $result['director_pass']) {
         $dbh = null;
-        header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+        header('Location: ../error.php?type=24', true, 307);
         exit;
     }
 
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 
@@ -30,10 +30,10 @@ $questions_num = $_POST['questions_num'];
 $order = $_POST['order'];
 
 if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 1) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=36', true, 307);
+    header('Location: ../error.php?type=36', true, 307);
     exit;
 } else if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 2) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=37', true, 307);
+    header('Location: ../error.php?type=37', true, 307);
     exit;
 }
 
@@ -68,7 +68,7 @@ else if ($order == 2) {
     }
 }
 else {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 
@@ -91,7 +91,7 @@ try {
     }
     $dbh = null;
 } catch (PDOException $e) {
-    header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
+    header('Location: ../error.php?type=24', true, 307);
     exit;
 }
 ?>
