@@ -15,11 +15,14 @@ if ($director_id == 'removed' || $director_pass == 'removed' || $director_name =
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_director WHERE director_id = :director_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':director_id', $director_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result['director_id'] != null) {
+    // 管理者IDの重複チェック
+    if ($result['director_id'] != false) {
         $dbh = null;
         header('Location: ../error.php?type=26', true, 307);
         exit;
@@ -30,7 +33,7 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     while ($i == 0) {
-        $table_id = rand(100000, 999999);
+        $table_id = rand(100000, 999999); // table_idの生成
         $check_id = true;
         foreach ($result as $row) {
             if ($table_id == $row['table_id']) {
@@ -38,7 +41,7 @@ try {
                 break;
             }
         }
-        if ($check_id == true) {
+        if ($check_id == true) { // 管理者アカウントの追加
             $insert_data = '\'' . $director_id . '\', \'' . $director_name . '\', \'' . $director_pass . '\', \'' . (string)$table_id . '\'';
             $sql = 'INSERT INTO info_director VALUE(' . $insert_data . ')';
             $dbh->query($sql);
@@ -48,6 +51,7 @@ try {
     
     $dbh = null;
 
+    // cookieに管理者情報を保存
     setcookie('director_id', $director_id, time() + (60 * 60 * 24 * 60));
     setcookie('director_pass', $director_pass, time() + (60 * 60 * 24 * 60));
 
