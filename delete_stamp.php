@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $delete_stamp_id = $_POST['delete_stamp_id'];
 

@@ -1,5 +1,7 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
+include('../set_book.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -20,108 +22,6 @@ try {
 } catch (PDOException $e) {
     header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);
     exit;
-}
-
-function check_form($book, $start, $end, $number, $limit) {
-    if ($book == '' || $book == 'n') {
-        return 1;
-    } else if (($start >= 1 && $end <= $limit && ($end - $start + 1) >= $number && $number > 0) == false) {
-        return 2;
-    } else {
-        return 3;
-    }
-}
-
-$limit = 0;
-if ($_POST['book_name'] == '1') {
-    $book_name = 'ターゲット1400';
-    $table_name = 'target_1400';
-    $limit = 1400;
-}
-else if ($_POST['book_name'] == '2') {
-    $book_name = 'ターゲット1900';
-    $table_name = 'target_1900';
-    $limit = 1900;
-}
-else if ($_POST['book_name'] == '3') {
-    $book_name = 'システム英単語';
-    $table_name = 'system_English';
-    $limit = 2027;
-}
-else if ($_POST['book_name'] == '4') {
-    $book_name = '速読英熟語(熟語)';
-    $table_name = 'rapid_Reading';
-    $limit = 855;
-}
-else if ($_POST['book_name'] == '5') {
-    $book_name = 'Vintage';
-    $table_name = 'Vintage';
-    $limit = 852;
-}
-else if ($_POST['book_name'] == '6') {
-    $book_name = 'パス単(3級)';
-    $table_name = 'pass_3';
-    $limit = 1200;
-}
-else if ($_POST['book_name'] == '7') {
-    $book_name = 'パス単(準２級)';
-    $table_name = 'pass_pre2';
-    $limit = 1500;
-}
-else if ($_POST['book_name'] == '8') {
-    $book_name = 'パス単(２級)';
-    $table_name = 'pass_2';
-    $limit = 1700;
-}
-else if ($_POST['book_name'] == '9') {
-    $book_name = 'パス単(準１級)';
-    $table_name = 'pass_pre1';
-    $limit = 1900;
-}
-else if ($_POST['book_name'] == '10') {
-    $book_name = 'パス単(１級)';
-    $table_name = 'pass_1';
-    $limit = 2100;
-}
-else if ($_POST['book_name'] == '11') {
-    $book_name = 'ゲットスルー2600';
-    $table_name = 'get_Through_2600';
-    $limit = 2100;
-}
-else if ($_POST['book_name'] == '12') {
-    $book_name = '明光暗記テキスト(単語)';
-    $table_name = 'meiko_original_1';
-    $limit = 453;
-}
-else if ($_POST['book_name'] == '13') {
-    $book_name = '明光暗記テキスト(文法)';
-    $table_name = 'meiko_original_2';
-    $limit = 100;
-}
-else if ($_POST['book_name'] == '14') {
-    $book_name = 'TOEIC金のフレーズ';
-    $table_name = 'gold_phrase';
-    $limit = 1000;
-}
-else if ($_POST['book_name'] == '15') {
-    $book_name = 'みるみる古文単語300';
-    $table_name = 'kobun300';
-    $limit = 300;
-}
-else if ($_POST['book_name'] == '16') {
-    $book_name = '古文単語315';
-    $table_name = 'kobun315';
-    $limit = 315;
-}
-else if ($_POST['book_name'] == '17') {
-    $book_name = '古文単語330';
-    $table_name = 'kobun330';
-    $limit = 330;
-}
-else if ($_POST['book_name'] == '' || $_POST['book_name'] == 'n') {
-    $book_name = 'none';
-    $table_name = 'none';
-    $limit = 0;
 }
 
 $start = $_POST['start'];

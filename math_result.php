@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $type = $_POST['type'];
 $level = $_POST['level'];

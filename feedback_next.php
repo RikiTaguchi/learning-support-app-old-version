@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $book_id = $_POST['book_id'];
 $book_name = $_POST['book_name'];

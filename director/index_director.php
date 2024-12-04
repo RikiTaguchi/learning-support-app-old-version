@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 if ($director_id == 'removed' || $director_pass == 'removed' || $director_name == 'removed') {
     header('Location: https://wordsystemforstudents.com/error.php?type=22', true, 307);

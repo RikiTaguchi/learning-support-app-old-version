@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $book_name = $_GET['book_name'];
 $book_id = $_GET['book_id'];

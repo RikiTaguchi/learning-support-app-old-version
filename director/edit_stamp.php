@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 $stamp_table_id = $_POST['stamp_table_id'];
 $stamp_img_id = $_POST['stamp_img_id'];

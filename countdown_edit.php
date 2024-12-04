@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $edit_type = $_POST['edit_type'];
 try {

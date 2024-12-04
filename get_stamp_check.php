@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $director_table_id = $_GET['table_id'];
 $img_id = $_GET['img_id'];

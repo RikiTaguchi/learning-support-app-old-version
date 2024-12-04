@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $new_login_id = $_POST['new_login_id'];
 $new_user_name = $_POST['new_user_name'];

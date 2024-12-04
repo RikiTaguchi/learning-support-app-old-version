@@ -1,4 +1,7 @@
-<?php include('./source.php'); ?>
+<?php
+include('./source.php');
+include('./info_db.php');
+?>
 
 <!DOCTYPE html>
 <html lang = "ja">
