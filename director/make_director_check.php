@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 if ($director_id == '' || $director_pass == '' || $director_name == '') {
     header('Location: https://wordsystemforstudents.com/error.php?type=24', true, 307);

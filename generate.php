@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 include('./parser/parse-activator/autoload.php'); // 構文解析器のセットアップ
 
 try {

@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 $img_title = $_POST['img_title'];
 $date_limit = $_POST['date_limit'];

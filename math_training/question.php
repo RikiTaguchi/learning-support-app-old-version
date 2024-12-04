@@ -1,5 +1,12 @@
 <?php
-include('./source2.php');
+include('../source.php');
+include('./source.php');
+include('./info1.php');
+include('./info2.php');
+include('./info3.php');
+include('./info4.php');
+include('./info5.php');
+include('./info6.php');
 
 $type = $_POST['type'];
 $level = $_POST['level'];
@@ -17,14 +24,6 @@ if ($_POST['start_time'] == '') {
 } else {
     $start_time = strtotime($_POST['start_time']);
 }
-
-include('./source.php');
-include('./info1.php');
-include('./info2.php');
-include('./info3.php');
-include('./info4.php');
-include('./info5.php');
-include('./info6.php');
 
 $info = set_question($type, $level);
 $title = $info[0];

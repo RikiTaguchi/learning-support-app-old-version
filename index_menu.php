@@ -1,5 +1,4 @@
 <!-- 目次のhtml -->
-
 <button class = "main-inner-button1-index">
     目次
 </button>
@@ -311,7 +310,7 @@
             </p>
         </li>
         <?php
-        if ($login_id != '000000') {
+        if (isset($login_id) && $login_id != '000000') {
             foreach ($result as $row) {
                 echo '<li class = "index-' . $row['book_id'] . ' element-index" style="display: none;">';
                 echo '<p class = "book-id">' . $row['book_id'] . '</p>';

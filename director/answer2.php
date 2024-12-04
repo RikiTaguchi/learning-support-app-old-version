@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 $book_name = $_GET['book_name'];
 $table_name = $_GET['table_name'];

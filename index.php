@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $date_today = strtotime(date('Y-m-d'));
 $notice = [];

@@ -1,10 +1,6 @@
 <?php
-require_once "phpqrcode/qrlib.php";
-
-$db_user = 'root';
-$db_pass = 'myrdspassword';
-$db_host = 'wordsystemdb.c74wk6yq0kc9.ap-northeast-1.rds.amazonaws.com';
-$db_name = 'wordsystemdb';
+include('phpqrcode/qrlib.php');
+include('../info_db_.php');
 
 $table_id = $_GET['table_id'];
 $img_id = $_GET['img_id'];

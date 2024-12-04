@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 include('./set_book.php');
 
 if ($_POST['book_id'] == '' || $_POST['book_id'] == 'n') {

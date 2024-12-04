@@ -1,5 +1,6 @@
 <?php
-include('./source2.php');
+include('./source.php');
+include('../info_db_.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -49,7 +50,7 @@ include('../banner.php');
             <div class = "main-inner">
                 <p class = "main-title">テスト作成</p>
 
-                <?php include('./index_menu2.php'); ?>
+                <?php include('../index_menu.php'); ?>
 
                 <form class = "main-form-inner" method = "POST" action = "set2.php">
                     <input type = "text" name = "director_id" style = "display: none;" value = "<?php echo $director_id ?>">

@@ -1,5 +1,6 @@
 <?php
 include('./source.php');
+include('./info_db.php');
 
 $new_memo = $_POST['user_memo'];
 $user_memo = '';

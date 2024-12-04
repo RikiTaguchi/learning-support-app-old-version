@@ -87,8 +87,9 @@ else if ($_POST['book_id'] == '17') {
 else if ($_POST['book_id'] == '' || $_POST['book_id'] == 'n') {
     $book_name = 'none';
     $book_id = 'none';
+    $limit = 0;
 }
-else {
+else if (isset($login_id)) {
     $book_id = $_POST['book_id'];
     $limit = 0;
     try {
