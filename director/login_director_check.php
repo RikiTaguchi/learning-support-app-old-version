@@ -15,13 +15,16 @@ if ($director_id == 'removed' || $director_pass == 'removed') {
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_director WHERE director_id = :director_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':director_id', $director_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($director_id == $result['director_id'] && $director_pass == $result['director_pass']) {
         $director_name = $result['director_name'];
         $dbh = null;
 
+        // cookieに管理者情報を保存
         setcookie('director_id', $director_id, time() + (60 * 60 * 24 * 60));
         setcookie('director_pass', $director_pass, time() + (60 * 60 * 24 * 60));
 

@@ -2,8 +2,8 @@
 include('./source.php');
 include('../info_db_.php');
 
+$book_id = $_GET['book_id'];
 $book_name = $_GET['book_name'];
-$table_name = $_GET['table_name'];
 $start = $_GET['start'];
 $end = $_GET['end'];
 $questions_num = $_GET['questions_num'];
@@ -24,12 +24,14 @@ try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     foreach ($number as $n) {
-        $sql = 'SELECT * FROM ' . $table_name . ' WHERE id = ' . $n;
-        $stmt = $dbh->query($sql);
+        $sql = 'SELECT * FROM ' . $book_id . ' WHERE id = :id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':id', $n, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $words[] = $result['word'];
         $answers[] = $result['answer'];
-        if ($table_name == 'Vintage') {
+        if ($book_id == 'Vintage' || $book_id == 'meiko_original_2') {
             $select1[] = $result['select1'];
             $select2[] = $result['select2'];
             $select3[] = $result['select3'];
@@ -67,7 +69,7 @@ try {
             echo '<div class = "header-inner-menu">' . PHP_EOL;
             echo '<p class = "header-inner-menu-title">' . $book_name . ' / #' . $start . '~' . $end . ' / ' . $questions_num . '題</p>'. PHP_EOL;
             echo '<div class = "header-inner-menu-button">';
-            echo '<form method = "post" action = "question2.php?db_id=' . $db_id . '&book_name=' . $book_name . '&table_name=' . $table_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
+            echo '<form method = "post" action = "question2.php?book_id=' . $book_id . '&book_name=' . $book_name . '&start=' . $start . '&end=' . $end . '&questions_num=' . $questions_num . '&';
             for ($i = 1; $i <= $questions_num; $i++) {
                 echo 'data' . $i . '=' . $number[$i - 1];
                 if ($i < $questions_num) {

@@ -6,18 +6,23 @@ try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_director WHERE director_id = :director_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':director_id', $director_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
+    
     if ($director_pass != $result['director_pass']) {
         $dbh = null;
         header('Location: ../error.php?type=24', true, 307);
         exit;
     }
 
-    $sql = 'SELECT * FROM info_image WHERE table_id = \'' . $table_id . '\' AND stamp_state = \'valid\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_image WHERE table_id = :table_id AND stamp_state = \'valid\'';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+    $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $img_list = $result;
 
@@ -48,7 +53,6 @@ include('../banner.php');
         <header class = "header">
             <?php include('./header2.php'); ?>
         </header>
-
         <main class = "main">
             <div class = "main-inner">
                 <h1>スタンプ一覧</h1>
@@ -71,8 +75,7 @@ include('../banner.php');
                             echo '<button class = "stamp-button-qr' . (string)$i . '" type = "button" style = "display: block; width: 120px; margin-top: 15px; padding: 5px; background-color: lightskyblue; border-radius: 10px; border-color: black; box-shadow: 3px 3px 5px 1px gray; color: black; font-weight: bold;">QRコードを表示</button>';
 
                             echo '<form method = "post" action = "form8.php">';
-                                echo '<input type = "text" name = "stamp_table_id" value = "' . $img_list[$i]['table_id'] . '" style = "display: none;">';
-                                echo '<input type = "text" name = "stamp_img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
+                                echo '<input type = "text" name = "img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_id" value = "' . $director_id . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_pass" value = "' . $director_pass . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_name" value = "' . $director_name . '" style = "display: none;">';
@@ -80,8 +83,7 @@ include('../banner.php');
                             echo '</form>';
 
                             echo '<form method = "post" action = "delete_stamp.php" onSubmit = "return checkSubmit5();">';
-                                echo '<input type = "text" name = "stamp_table_id" value = "' . $img_list[$i]['table_id'] . '" style = "display: none;">';
-                                echo '<input type = "text" name = "stamp_img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
+                                echo '<input type = "text" name = "img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_id" value = "' . $director_id . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_pass" value = "' . $director_pass . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_name" value = "' . $director_name . '" style = "display: none;">';
@@ -188,8 +190,7 @@ include('../banner.php');
                             echo '<button class = "stamp-button-qr' . (string)$i . '" type = "button" style = "display: block; width: 120px; margin-top: 15px; padding: 5px; background-color: lightskyblue; border-radius: 10px; border-color: black; box-shadow: 3px 3px 5px 1px gray; color: black; font-weight: bold;">QRコードを表示</button>';
 
                             echo '<form method = "post" action = "form8.php">';
-                                echo '<input type = "text" name = "stamp_table_id" value = "' . $img_list[$i]['table_id'] . '" style = "display: none;">';
-                                echo '<input type = "text" name = "stamp_img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
+                                echo '<input type = "text" name = "img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_id" value = "' . $director_id . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_pass" value = "' . $director_pass . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_name" value = "' . $director_name . '" style = "display: none;">';
@@ -197,8 +198,7 @@ include('../banner.php');
                             echo '</form>';
 
                             echo '<form method = "post" action = "delete_stamp.php" onSubmit = "return checkSubmit5();">';
-                                echo '<input type = "text" name = "stamp_table_id" value = "' . $img_list[$i]['table_id'] . '" style = "display: none;">';
-                                echo '<input type = "text" name = "stamp_img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
+                                echo '<input type = "text" name = "img_id" value = "' . $img_list[$i]['img_id'] . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_id" value = "' . $director_id . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_pass" value = "' . $director_pass . '" style = "display: none;">';
                                 echo '<input type = "text" name = "director_name" value = "' . $director_name . '" style = "display: none;">';
@@ -430,7 +430,6 @@ include('../banner.php');
                 ?>
             </div>
         </main>
-
         <footer class = "footer">
             <?php include('./footer2.php'); ?>
         </footer>
