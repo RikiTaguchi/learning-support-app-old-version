@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -50,14 +50,11 @@ include('../banner.php');
         <main class = "main">
             <div class = "main-inner">
                 <p class = "main-title">テスト作成</p>
-
                 <?php include('../index_menu.php'); ?>
-
                 <form class = "main-form-inner" method = "POST" action = "set2.php">
                     <input type = "text" name = "director_id" style = "display: none;" value = "<?php echo $director_id ?>">
                     <input type = "text" name = "director_pass" style = "display: none;" value = "<?php echo $director_pass ?>">
                     <input type = "text" name = "director_name" style = "display: none;" value = "<?php echo $director_name ?>">
-
                     <p>
                         参考書　：
                         <select class = "main-form-book" name = "book_name" required id="mySelect">
@@ -96,7 +93,6 @@ include('../banner.php');
                 </form>
             </div>
         </main>
-
         <footer class = "footer">
             <?php include('./footer2.php'); ?>
         </footer>

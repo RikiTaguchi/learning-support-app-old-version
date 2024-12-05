@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 $img_title_new = $_POST['img_title'];
 $date_limit_new = $_POST['date_limit'];

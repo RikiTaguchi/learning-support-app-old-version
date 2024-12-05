@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 if ($_POST['new_director_id'] == '') {
     $director_id = $_POST['director_id'];

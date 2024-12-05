@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 $new_director_id = $_POST['new_director_id'];
 $new_director_name = $_POST['new_director_name'];

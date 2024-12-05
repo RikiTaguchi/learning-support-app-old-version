@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 if ($director_id == 'removed' || $director_pass == 'removed' || $director_name == 'removed') {
     header('Location: ../error.php?type=22', true, 307);
@@ -50,7 +50,6 @@ include('../banner.php');
         <header class = "header">
             <?php include('./header2.php'); ?>
         </header>
-
         <main class = "main">
             <div class = "main-inner">
                 <h1>管理者メニュー</h1>
@@ -91,7 +90,6 @@ include('../banner.php');
                 </form>
             </div>
         </main>
-
         <footer class = "footer">
             <?php include('./footer2.php'); ?>
         </footer>

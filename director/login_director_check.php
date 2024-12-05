@@ -1,6 +1,6 @@
 <?php
 include('./source.php');
-include('../info_db_.php');
+include('../info_db.php');
 
 if ($director_id == '' || $director_pass == '') {
     header('Location: ../error.php?type=24', true, 307);
