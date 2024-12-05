@@ -5,9 +5,10 @@ include('../info_db_.php');
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $sql = 'SELECT * FROM info_director WHERE director_id = \'' . $director_id . '\'';
-    $stmt = $dbh->query($sql);
+    $sql = 'SELECT * FROM info_director WHERE director_id = :director_id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':director_id', $director_id, PDO::PARAM_STR);
+    $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $table_id = $result['table_id'];
     
@@ -43,7 +44,6 @@ try {
         <header class = "header">
             <?php include('./header2.php'); ?>
         </header>
-
         <main class = "main">
             <div class = "main-inner">
                 <h1>スタンプ登録</h1>
@@ -156,7 +156,6 @@ try {
                 </form>
             </div>
         </main>
-
         <footer class = "footer">
             <?php include('./footer2.php'); ?>
         </footer>
