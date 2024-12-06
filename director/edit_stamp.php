@@ -41,6 +41,7 @@ if ($stamp_number === 1) {
             unlink($file_path_delete);
             move_uploaded_file($_FILES['img_data']['tmp_name'], $file_path);
             $sql = 'UPDATE info_image SET img_extention = :img_extention, img_title = :img_title, date_limit = :date_limit WHERE table_id = :table_id AND img_id = :img_id';
+            $stmt = $dbh->prepare($sql);
             $stmt->bindParam(':img_extention', $img_extention, PDO::PARAM_STR);
             $stmt->bindParam(':img_title', $img_title_new, PDO::PARAM_STR);
             $stmt->bindParam(':date_limit', $date_limit_new, PDO::PARAM_STR);
@@ -98,6 +99,7 @@ if ($stamp_number === 1) {
                 unlink($file_path_delete);
                 move_uploaded_file($_FILES['img_data_' . (string)$i]['tmp_name'], $file_path);
                 $sql = 'UPDATE info_image SET img_extention = :img_extention, img_title = :img_title, date_limit = :date_limit, stamp_prob = :stamp_prob WHERE table_id = :table_id AND img_id = :img_id AND stamp_id = :stamp_id';
+                $stmt = $dbh->prepare($sql);
                 $stmt->bindParam(':img_extention', $img_extention, PDO::PARAM_STR);
                 $stmt->bindParam(':img_title', $img_title_new, PDO::PARAM_STR);
                 $stmt->bindParam(':date_limit', $date_limit_new, PDO::PARAM_STR);

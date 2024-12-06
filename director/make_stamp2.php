@@ -70,7 +70,7 @@ try {
         // スタンプ情報の登録
         $stamp_id = (string)$i;
         $stamp_prob = (string)$img_probability[$i];
-        $sql = 'INSERT INTO info_image VALUE(\'' . (string)$table_id . '\', \'' . (string)$img_id . '\', \'' . (string)$i . '\', \'' . (string)$img_probability[$i] . '\', \'' . $img_extention[$i] . '\', \'' . $img_title . '\', \'' . $date_limit . '\', \'valid\')';
+        $sql = 'INSERT INTO info_image VALUE(:table_id, :img_id, :stamp_id, :stamp_prob, :img_extention, :img_title, :date_limit, \'valid\')';
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
         $stmt->bindParam(':img_id', $img_id, PDO::PARAM_INT);
