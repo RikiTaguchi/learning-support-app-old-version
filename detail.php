@@ -174,7 +174,7 @@ include('./banner.php');
                             }
                         echo '</table>';
                     } else {
-                        header('Location: https://wordsystemforstudents.com/error.php?type=12', true, 307);
+                        header('Location: error.php?type=12', true, 307);
                         exit;
                     }
                 echo '</div>';

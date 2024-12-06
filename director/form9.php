@@ -1,6 +1,7 @@
 <?php
 include('./source.php');
 include('../info_db.php');
+include('../source_book.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -57,25 +58,8 @@ include('../banner.php');
                     <input type = "text" name = "director_name" style = "display: none;" value = "<?php echo $director_name ?>">
                     <p>
                         参考書　：
-                        <select class = "main-form-book" name = "book_name" required id="mySelect">
-                            <option value = "n" hidden>選択してください</option>
-                            <option value = "1">ターゲット1400</option>
-                            <option value = "2">ターゲット1900</option>
-                            <option value = "3">システム英単語</option>
-                            <option value = "4">速読英熟語(熟語)</option>
-                            <option value = "5">Vintage</option>
-                            <option value = "6">パス単(３級)</option>
-                            <option value = "7">パス単(準２級)</option>
-                            <option value = "8">パス単(２級)</option>
-                            <option value = "9">パス単(準１級)</option>
-                            <option value = "10">パス単(１級)</option>
-                            <option value = "11">ゲットスルー2600</option>
-                            <option value = "12">明光暗記テキスト(単語)</option>
-                            <option value = "13">明光暗記テキスト(文法)</option>
-                            <option value = "14">TOEIC金のフレーズ</option>
-                            <option value = "15">みるみる古文単語300</option>
-                            <option value = "16">古文単語315</option>
-                            <option value = "17">古文単語330</option>
+                        <select class = "main-form-book" name = "book_id" required id="mySelect">
+                            <?php echo set_options() ?>
                         </select>
                     </p>
                     <p>開始番号：<input class = "main-form-start" type = "number" name = "start" required></p>

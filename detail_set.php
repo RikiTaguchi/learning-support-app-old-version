@@ -52,6 +52,11 @@ try {
         $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
         $stmt->execute();
+        $sql = 'DELETE FROM info_feedback WHERE table_id = :table_id AND book_id = :book_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
+        $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
+        $stmt->execute();
         $dbh = null;
         header('Location: index.php', true, 307);
     } else { // エラー

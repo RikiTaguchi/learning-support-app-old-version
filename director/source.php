@@ -18,14 +18,3 @@ function make_link($title, $url, $info) {
     ';
     echo $text_form;
 }
-
-// 入力範囲のエラーをチェックする関数
-function check_form($book, $start, $end, $number, $limit) {
-    if ($book == '' || $book == 'n') {
-        return 1;
-    } else if (($start >= 1 && $end <= $limit && ($end - $start + 1) >= $number && $number > 0) == false) {
-        return 2;
-    } else {
-        return 3;
-    }
-}

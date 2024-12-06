@@ -30,10 +30,10 @@ $end = $_POST['end'];
 $questions_num = $_POST['questions_num'];
 $order = $_POST['order'];
 
-if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 1) {
+if (check_form($_POST['book_id'], $start, $end, $questions_num, $limit) == 1) {
     header('Location: ../error.php?type=36', true, 307);
     exit;
-} else if (check_form($_POST['book_name'], $start, $end, $questions_num, $limit) == 2) {
+} else if (check_form($_POST['book_id'], $start, $end, $questions_num, $limit) == 2) {
     header('Location: ../error.php?type=37', true, 307);
     exit;
 }
@@ -116,7 +116,7 @@ try {
                 <input type = "text" name = "director_pass" style = "display: none;" value = "<?php echo $director_pass; ?>">
                 <input type = "text" name = "director_name" style = "display: none;" value = "<?php echo $director_name; ?>">
                 <button class = "header-logo" type = "submit">
-                    <img src = "./images/logo-1.png" alt = "ロゴ画像">
+                    <img src = "../images/logo-1.png" alt = "ロゴ画像">
                 </button>
             </form>
             <div class = "header-inner-menu">
