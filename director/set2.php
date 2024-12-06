@@ -2,6 +2,7 @@
 include('./source.php');
 include('../info_db.php');
 include('../set_book.php');
+include('../source_book.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
