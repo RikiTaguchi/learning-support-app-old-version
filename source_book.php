@@ -18,6 +18,7 @@ function check_form($book, $start, $end, $number, $limit) {
 
 // 既存Bookのoptionタグを生成する関数
 function set_options() {
+    global $book_id_list;
     global $book_name_list;
     global $default_count;
     echo '<option value = "n" hidden>選択してください</option>' . PHP_EOL;
@@ -26,3 +27,15 @@ function set_options() {
     }
 }
 
+// 既存Bookのoptionタグを生成する関数(form3.php用)
+function set_options_feedback($list_feedback) {
+    global $book_id_list;
+    global $book_name_list;
+    global $default_count;
+    echo '<option value = "n" hidden>選択してください</option>' . PHP_EOL;
+    for ($i = 0; $i < $default_count; $i++) {
+        if (in_array($book_id_list[$i], $list_feedback)) {
+            echo '<option value = "' . (string)($i + 1) . '">' . $book_name_list[$i] . '</option>' . PHP_EOL;
+        }
+    }
+}

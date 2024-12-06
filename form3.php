@@ -81,61 +81,8 @@ include('./banner.php');
                         <p>
                             参考書　：
                             <select class = "main-form-book" name = "book_id" required id="mySelect">
-                                <option value = "n" hidden>選択してください</option>
                                 <?php
-                                if (in_array('target_1400', $list_feedback)) {
-                                    echo '<option value = "1">ターゲット1400</option>';
-                                }
-                                if (in_array('target_1900', $list_feedback)) {
-                                    echo '<option value = "2">ターゲット1900</option>';
-                                }
-                                if (in_array('system_English', $list_feedback)) {
-                                    echo '<option value = "3">システム英単語</option>';
-                                }
-                                if (in_array('rapid_Reading', $list_feedback)) {
-                                    echo '<option value = "4">速読英熟語(熟語)</option>';
-                                }
-                                if (in_array('Vintage', $list_feedback)) {
-                                    echo '<option value = "5">Vintage</option>';
-                                }
-                                if (in_array('pass_3', $list_feedback)) {
-                                    echo '<option value = "6">パス単(3級)</option>';
-                                }
-                                if (in_array('pass_pre2', $list_feedback)) {
-                                    echo '<option value = "7">パス単(準２級)</option>';
-                                }
-                                if (in_array('pass_2', $list_feedback)) {
-                                    echo '<option value = "8">パス単(２級)</option>';
-                                }
-                                if (in_array('pass_pre1', $list_feedback)) {
-                                    echo '<option value = "9">パス単(準１級)</option>';
-                                }
-                                if (in_array('pass_1', $list_feedback)) {
-                                    echo '<option value = "10">パス単(１級)</option>';
-                                }
-                                if (in_array('get_Through_2600', $list_feedback)) {
-                                    echo '<option value = "11">ゲットスルー2600</option>';
-                                }
-                                if (in_array('meiko_original_1', $list_feedback)) {
-                                    echo '<option value = "12">明光暗記テキスト(単語)</option>';
-                                }
-                                if (in_array('meiko_original_2', $list_feedback)) {
-                                    echo '<option value = "13">明光暗記テキスト(文法)</option>';
-                                }
-                                if (in_array('gold_phrase', $list_feedback)) {
-                                    echo '<option value = "14">TOEIC金のフレーズ</option>';
-                                }
-                                if (in_array('kobun300', $list_feedback)) {
-                                    echo '<option value = "15">みるみる古文単語300</option>';
-                                }
-                                if (in_array('kobun315', $list_feedback)) {
-                                    echo '<option value = "16">古文単語315</option>';
-                                }
-                                if (in_array('kobun330', $list_feedback)) {
-                                    echo '<option value = "17">古文単語330</option>';
-                                }
-                                ?>
-                                <?php
+                                set_options_feedback($list_feedback);
                                 foreach ($result as $row) {
                                     if (in_array($row['book_id'], $list_feedback)) {
                                         echo '<option value = "' . $row['book_id'] . '">' . $row['book_name'] . '</option>';
