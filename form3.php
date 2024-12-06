@@ -1,6 +1,7 @@
 <?php
 include('./source.php');
 include('./info_db.php');
+include('./source_book.php');
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -79,7 +80,7 @@ include('./banner.php');
                         ?>
                         <p>
                             参考書　：
-                            <select class = "main-form-book" name = "book_name" required id="mySelect">
+                            <select class = "main-form-book" name = "book_id" required id="mySelect">
                                 <option value = "n" hidden>選択してください</option>
                                 <?php
                                 if (in_array('target_1400', $list_feedback)) {

@@ -65,7 +65,7 @@ try {
                 echo '<input type = "text" name = "director_pass" style = "display: none;" value = "' . $director_pass . '">';
                 echo '<input type = "text" name = "director_name" style = "display: none;" value = "' . $director_name . '">';
                 echo '<button class = "header-logo" type = "submit">';
-                    echo '<img src = "./images/logo-1.png" alt = "ロゴ画像">';
+                    echo '<img src = "../images/logo-1.png" alt = "ロゴ画像">';
                 echo '</button>';
             echo '</form>';
             echo '<div class = "header-inner-menu">' . PHP_EOL;

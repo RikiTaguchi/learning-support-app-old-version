@@ -1,6 +1,7 @@
 <?php
 include('./source.php');
 include('./info_db.php');
+include('./source_book.php');
 
 $book_id = $_POST['book_id'];
 $book_name = $_POST['book_name'];
@@ -64,7 +65,7 @@ try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (array_search($book_id, $book_id_list) == false) {
-        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_id';
+        $sql = 'SELECT * FROM info_my_book_data WHERE table_id = :table_id AND book_id = :book_id AND question_number = :question_number';
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':table_id', $table_id, PDO::PARAM_INT);
         $stmt->bindParam(':book_id', $book_id, PDO::PARAM_STR);
