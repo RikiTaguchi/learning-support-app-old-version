@@ -11,9 +11,9 @@ function make_link($title, $url, $info) {
             <input type = "text" name = "director_name" style = "display: none;" value = "' . $info[0] . '">
             <input type = "text" name = "director_id" style = "display: none;" value = "' . $info[1] . '">
             <input type = "text" name = "director_pass" style = "display: none;" value = "' . $info[2] . '">
-        <button class = "make-link-button" type = "submit">
-            <p>' . $title . '</p>
-        </button>
+            <button class = "make-link-button" type = "submit">
+                <p>' . $title . '</p>
+            </button>
         </form>
     ';
     echo $text_form;

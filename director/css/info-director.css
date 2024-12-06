@@ -40,7 +40,7 @@ main {
     align-items: center;
     padding-top: 90px;
     padding-bottom: 40px;
-    background-image: url(../images/note.png);
+    background-image: url(../../images/note.png);
     background-size: cover;
     background-repeat: repeat-y;
 }

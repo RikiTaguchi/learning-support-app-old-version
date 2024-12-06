@@ -11,9 +11,9 @@ function make_link($title, $url, $info) {
             <input class = "info_account" type = "text" name = "user_name" value = "' . $info[0] . '">
             <input class = "info_account" type = "text" name = "login_id" value = "' . $info[1] . '">
             <input class = "info_account" type = "text" name = "user_pass" value = "' . $info[2] . '">
-        <button class = "make-link-button" type = "submit">
-            <p>' . $title . '</p>
-        </button>
+            <button class = "make-link-button" type = "submit">
+                <p>' . $title . '</p>
+            </button>
         </form>
     ';
     echo $text_form;

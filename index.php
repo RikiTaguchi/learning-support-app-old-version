@@ -100,8 +100,8 @@ include('./banner.php');
         <script src = "./js/set-banner.js"></script>
         <script src = "./js/check-submit.js"></script>
 		<script>
-            const button = new Array(<? echo (string)count($notice); ?>);
-            const detail = new Array(<? echo (string)count($notice); ?>);
+            const button = new Array(<?php echo (string)count($notice); ?>);
+            const detail = new Array(<?php echo (string)count($notice); ?>);
 
 			<?php foreach ($notice as $i => $info) { ?>
 				window.addEventListener('load', () => {
