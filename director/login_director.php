@@ -32,7 +32,7 @@
                     <div class = "main-form-login"><input class = "main-login-button" type = "submit" name = "submit" value = "ログイン"></div>
                 </form>
                 <button class = "main-button-new">
-                    <a class = "main-button-new-link" href = "make_director.html">新規登録</a>
+                    <a class = "main-button-new-link" href = "make_director.php">新規登録</a>
                 </button>
             </div>
         </main>
