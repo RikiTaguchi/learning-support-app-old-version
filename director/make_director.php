@@ -34,7 +34,7 @@
                     <div class = "main-form-make"><input class = "main-make-button" type = "submit" name = "submit" value = "登録"></div>
                 </form>
                 <p class = "main-back">
-                    <a href = "login_director.html">ログイン画面へ戻る</a>
+                    <a href = "login_director.php">ログイン画面へ戻る</a>
                 </p>
             </div>
         </main>
