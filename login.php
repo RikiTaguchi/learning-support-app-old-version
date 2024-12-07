@@ -34,7 +34,7 @@
                     <div class = "main-form-login"><input class = "main-login-button" type = "submit" name = "submit" value = "ログイン"></div>
                 </form>
                 <button class = "main-button-new">
-                    <a class = "main-button-new-link" href = "make_account.html">新規登録</a>
+                    <a class = "main-button-new-link" href = "make_account.php">新規登録</a>
                 </button>
                 <form method = "post" action = "index.php">
                     <input class = "info-guest" type = "text" name = "login_id" value = "000000">
