@@ -82,7 +82,7 @@ include('../banner.php');
                     <input type = "text" name = "director_name" style = "display: none;" value = "<?php echo $director_name; ?>">
                 </form>
 
-                <form class = "main-inner-logout" method = "POST" action = "./login_director.html?banner=28">
+                <form class = "main-inner-logout" method = "POST" action = "./login_director.php?banner=28">
                     <button type = "submit">ログアウト</button>
                     <input type = "text" name = "director_id" style = "display: none;" value = "<?php echo $director_id; ?>">
                     <input type = "text" name = "director_pass" style = "display: none;" value = "<?php echo $director_pass; ?>">
