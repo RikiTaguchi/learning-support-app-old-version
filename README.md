@@ -1,9 +1,9 @@
 # ローカル環境(テスト実行時)でのURL
 ### 生徒アカウント
-- http://localhost/learning-support-app/login.html
+- http://localhost/learning-support-app/login.php
 
 ### 管理者アカウント
-- http://localhost/learning-support-app/director/login_director.html
+- http://localhost/learning-support-app/director/login_director.php
 
 # 環境構築
 ### XAMPPをインストール
