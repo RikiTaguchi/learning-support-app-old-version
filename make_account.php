@@ -14,7 +14,7 @@
     <body>
         <header class = "header">
             <div class = "header-inner">
-                <a class = "header-logo" href = "./login.html">
+                <a class = "header-logo" href = "./login.php">
                     <img src = "./images/logo-1.png" alt = "ロゴ画像">
                 </a>
             </div>
@@ -41,7 +41,7 @@
         <footer class = "footer">
             <div class = "footer-inner">
                 <div class = "footer-logo">
-                    <a href = "./login.html">
+                    <a href = "./login.php">
                         <img src = "./images/logo-3.png" alt = "ロゴ画像">
                     </a>
                 </div>

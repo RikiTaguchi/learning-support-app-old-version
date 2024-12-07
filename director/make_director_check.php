@@ -55,7 +55,7 @@ try {
     setcookie('director_id', $director_id, time() + (60 * 60 * 24 * 60));
     setcookie('director_pass', $director_pass, time() + (60 * 60 * 24 * 60));
 
-    header('Location: login_director.html?banner=27', true, 307);
+    header('Location: login_director.php?banner=27', true, 307);
     exit;
 } catch (PDOException $e) {
     header('Location: ../error.php?type=24', true, 307);

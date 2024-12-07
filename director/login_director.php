@@ -15,7 +15,7 @@
     <body>
         <header class = "header">
             <div class = "header-inner">
-                <a class = "header-logo" href = "./login_director.html">
+                <a class = "header-logo" href = "./login_director.php">
                     <img src = "../images/logo-1.png" alt = "ロゴ画像">
                 </a>
             </div>
@@ -39,7 +39,7 @@
         <footer class = "footer">
             <div class = "footer-inner">
                 <div class = "footer-logo">
-                    <a href = "./login_director.html">
+                    <a href = "./login_director.php">
                         <img src = "../images/logo-3.png" alt = "ロゴ画像">
                     </a>
                 </div>
