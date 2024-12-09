@@ -46,7 +46,7 @@ try {
         exit;
     }
 
-    $sql = 'SELECT * FROM info_stamp';
+    $sql = 'SELECT * FROM info_stamp ORDER BY id';
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $i => $row) {
