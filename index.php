@@ -150,7 +150,7 @@ include('./banner.php');
                         echo '<p class = "main-countdown-text5">日！</p>';
                     echo '</div>';
                 } else {
-                    echo '<p class = "main-countdown-text6">ここに日程を登録すると、カウントダウンされます。</p>';
+                    echo '<p class = "main-countdown-text6">日程を登録し、カウントダウンできます。</p>';
                 }
                 ?>
 
@@ -203,7 +203,7 @@ include('./banner.php');
                 <div class = "main-memo-element">
                     <?php
                     if ($user_memo == '') {
-                        echo '<p>目標や予定を書き込み、有効に活用しましょう！</p>';
+                        echo '<p>目標や予定を書き込みましょう。</p>';
                     } else {
                         echo '<p>' . nl2br($user_memo) . '</p>';
                     }

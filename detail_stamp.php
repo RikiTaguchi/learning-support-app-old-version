@@ -105,9 +105,9 @@ include('./banner.php');
 
                 <?php for ($i = 9 * $stamp_page_position; $i < (9 * $stamp_page_position) + $add_count; $i += 1) { ?>
                 
-                const openButton<?php echo (string)$i; ?> = document.querySelector('.main-stamp-button<? echo (string)$i; ?>');
-                const closeButton<?php echo (string)$i; ?> = document.querySelector('.main-stamp-info-button<? echo (string)$i; ?>');
-                const detail<?php echo (string)$i; ?> = document.querySelector('.main-stamp-info<? echo (string)$i; ?>');
+                const openButton<?php echo (string)$i; ?> = document.querySelector('.main-stamp-button<?php echo (string)$i; ?>');
+                const closeButton<?php echo (string)$i; ?> = document.querySelector('.main-stamp-info-button<?php echo (string)$i; ?>');
+                const detail<?php echo (string)$i; ?> = document.querySelector('.main-stamp-info<?php echo (string)$i; ?>');
 
                 openButton<?php echo (string)$i; ?>.addEventListener('click', () => {
                     if (detail<?php echo (string)$i; ?>.style.display === 'none' && checkDetail.textContent === 'none') {
