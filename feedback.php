@@ -46,13 +46,6 @@ if ($_POST['next_number'] == '') {
     }
 }
 
-$word = 'word';
-$answer = 'answer';
-$select1 = 'select1';
-$select2 = 'select2';
-$select3 = 'select3';
-$select4 = 'select4';
-$type = 'type';
 if ($order == 1) {
     if ($_POST['next_number'] == '') {
         foreach ($result as $row) {

@@ -15,13 +15,7 @@ for ($i = 0; $i < $questions_num; $i ++) {
     $number[] = $_POST['question_number' . $i]; 
 }
 $selected = $_POST['submit'];
-$word = 'word';
-$answer = 'answer';
-$select1 = 'select1';
-$select2 = 'select2';
-$select3 = 'select3';
-$select4 = 'select4';
-$type = 'type';
+$input_text = $_POST['input-text'];
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
@@ -147,11 +141,11 @@ try {
                         echo '<p class = "main-inner-type-1">answer: </p>';
                         echo '<p class = "main-inner-selecter">' . $answer . ' (' . $number[(int)$n] .  ')</p>';
                     } else {
-                        if ($answer == $answer_text) {
+                        if ($answer == $input_text) {
                             echo '<img class = "correct_img" src = "./images/correct.png" alt = "正解">';
                         } else {
                             echo '<img class = "incorrect_img" src = "./images/incorrect.png" alt = "不正解">';
-                            echo '<p class = "main-inner-wrong">' . $answer_text . '</p>';
+                            echo '<p class = "main-inner-wrong">' . $input_text . '</p>';
                         }
                         echo '<p class = "main-inner-type-other">answer: </p>';
                         echo '<p class = "main-inner-selecter-mini">' . $answer . ' (' . $number[(int)$n] . ')</p>';

@@ -21,13 +21,6 @@ if (check_form($_POST['book_id'], $start, $end, $questions_num, $limit) == 1) {
 }
 
 $number = [];
-$word = 'word';
-$answer = 'answer';
-$select1 = 'select1';
-$select2 = 'select2';
-$select3 = 'select3';
-$select4 = 'select4';
-$type = 'type';
 if ($order == 1) {
     if ($_POST['next_number'] == '') {
         $i = 1;
