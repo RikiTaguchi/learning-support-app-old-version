@@ -1,5 +1,5 @@
 <?php
-include('phpqrcode/qrlib.php');
+include('./phpqrcode/qrlib.php');
 include('./domain.php');
 
 $table_id = $_GET['table_id'];
