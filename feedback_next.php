@@ -21,14 +21,6 @@ $number = [];
 for ($i = 0; $i < $questions_num; $i ++) {
     $number[] = $_POST['question_number' . $i]; 
 }
-$word = 'word';
-$answer = 'answer';
-$select1 = 'select1';
-$select2 = 'select2';
-$select3 = 'select3';
-$select4 = 'select4';
-$type = 'type';
-$answer_text = 'answer';
 
 try {
     $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);

@@ -23,14 +23,6 @@ $number = [];
 for ($i = 0; $i < $questions_num; $i ++) {
     $number[] = $_POST['question_number' . $i]; 
 }
-$word = 'word';
-$answer = 'answer';
-$select1 = 'select1';
-$select2 = 'select2';
-$select3 = 'select3';
-$select4 = 'select4';
-$type = 'type';
-$answer_text = 'answer';
 
 if ($login_id != '000000') {
     try {
