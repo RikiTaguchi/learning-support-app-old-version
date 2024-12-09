@@ -67,8 +67,8 @@ const checkImage = () => {
 
    if (code) {
       drawRect(code.location);
-      const pattern1 = /^https:\/\/wordsystemforstudents.com\/get_stamp.php\?table_id=[0-9]{6}&img_id=[0-9]{6}&img_extention=.+$/g;
-      const pattern2 = /^https:\/\/wordsystemforstudents.com\/get_stamp.php\?table_id=[0-9]{6}&img_id=[0-9]{6}&img_extention_0=.+$/g;
+      const pattern1 = /^https:\/\/wordsystemforlearning.com\/get_stamp.php\?table_id=[0-9]{6}&img_id=[0-9]{6}&img_extention=.+$/g;
+      const pattern2 = /^https:\/\/wordsystemforlearning.com\/get_stamp.php\?table_id=[0-9]{6}&img_id=[0-9]{6}&img_extention_0=.+$/g;
       if (pattern1.test(code.data) === true && previewButton.style.display === 'none' && previewBackButton.style.display === 'none') {
          let infoQR = (code.data).split('?')[1].split('&');
          let tableId = infoQR[0].split('=')[1];
