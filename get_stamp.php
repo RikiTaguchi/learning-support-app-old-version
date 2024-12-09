@@ -62,10 +62,11 @@ try {
         $stmt->bindParam(':table_id', $director_table_id, PDO::PARAM_INT);
         $stmt->bindParam(':img_id', $img_id, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $img_extention = $result['img_extention'];
         $img_title = $result['img_title'];
         $stamp_id = 'none';
+        date_default_timezone_set('Asia/Tokyo');
         $date_limit = strtotime($result['date_limit']);
         $date_today = strtotime(date('Y-m-d'));
     } else {
@@ -78,6 +79,7 @@ try {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $img_probability_list[] = (int)$result['stamp_prob'];
+            date_default_timezone_set('Asia/Tokyo');
             $date_limit = strtotime($result['date_limit']);
             $date_today = strtotime(date('Y-m-d'));
         }
@@ -103,28 +105,24 @@ if (($date_limit - $date_today) / (60 * 60 * 24) >= 0) {
         $dbh = new PDO('mysql:host=' . $db_host  . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        $sql = 'SELECT * FROM info_stamp';
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $i = 1;
+        foreach ($result as $row) {
+            $i += 1;
+        }
+
         $get_date_set = date('Y-m-d');
-        $sql = 'INSERT INTO info_stamp (user_table_id, director_table_id, img_id, stamp_id, get_date) VALUES(:user_table_id, :director_table_id, :img_id, :stamp_id, :get_date)';
+        $sql = 'INSERT INTO info_stamp (id, user_table_id, director_table_id, img_id, stamp_id, get_date) VALUES(:id, :user_table_id, :director_table_id, :img_id, :stamp_id, :get_date)';
         $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':id', $i, PDO::PARAM_INT);
         $stmt->bindParam(':user_table_id', $user_table_id, PDO::PARAM_INT);
         $stmt->bindParam(':director_table_id', $director_table_id, PDO::PARAM_INT);
         $stmt->bindParam(':img_id', $img_id, PDO::PARAM_INT);
         $stmt->bindParam(':stamp_id', $stamp_id, PDO::PARAM_STR);
         $stmt->bindParam(':get_date', $get_date_set, PDO::PARAM_STR);
         $stmt->execute();
-
-        $sql = 'SELECT * FROM info_stamp';
-        $stmt = $dbh->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($result as $i => $row) {
-            $id_new = $i + 1;
-            $sql = 'UPDATE info_stamp SET id = :id_new WHERE id = :id_pre';
-            $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':id_new', $id_new, PDO::PARAM_INT);
-            $stmt->bindParam(':id_pre', $row['id'], PDO::PARAM_INT);
-            $stmt->execute();
-        }
 
         $dbh = null;
 
