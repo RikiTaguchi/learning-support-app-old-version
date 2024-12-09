@@ -10,7 +10,7 @@ try {
     $stmt->bindParam(':login_id', $login_id, PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($login_id == $result['login_id'] && $user_pass == $result['user_pass']) {
+    if ($login_id === $result['login_id'] && $user_pass === $result['user_pass']) {
         $user_name = $result['user_name'];
         $dbh = null;
 
@@ -28,7 +28,7 @@ try {
         $dbh = null;
         $check_account = false;
         foreach ($result2 as $row) {
-            if ($row['login_id'] == $login_id) {
+            if ($row['login_id'] === $login_id) {
                 $check_account = true;
                 break;
             }

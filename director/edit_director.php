@@ -22,7 +22,7 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
-        if ($row['director_id'] == $new_director_id) {
+        if ($row['director_id'] === $new_director_id) {
             if ($row['director_id'] != $director_id) {
                 $dbh = null;
                 header('Location: ../error.php?type=31', true, 307);

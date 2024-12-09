@@ -20,7 +20,7 @@ try {
     $stmt->bindParam(':director_id', $director_id, PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($director_id == $result['director_id'] && $director_pass == $result['director_pass']) {
+    if ($director_id === $result['director_id'] && $director_pass === $result['director_pass']) {
         $director_name = $result['director_name'];
         $dbh = null;
 
@@ -37,7 +37,7 @@ try {
         $dbh = null;
         $check_account = false;
         foreach ($result2 as $row) {
-            if ($row['director_id'] == $director_id) {
+            if ($row['director_id'] === $director_id) {
                 $check_account = true;
                 break;
             }

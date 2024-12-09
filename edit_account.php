@@ -14,7 +14,7 @@ try {
     $stmt = $dbh->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
-        if ($row['login_id'] == $new_login_id) {
+        if ($row['login_id'] === $new_login_id) {
             if ($row['login_id'] != $login_id) {
                 $dbh = null;
                 header('Location: error.php?type=5', true, 307);
