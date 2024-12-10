@@ -67,6 +67,7 @@
   - 作成後、wordsystemdb内に、必要なテーブルを作成する(テーブル一覧を参照)
   - 文字列(varchar)の長さは255
   - int, dateの長さは未指定でOK
+  - 単語帳データのCSVファイルをインポートする
 
 ## DBの初期設定(AWS本番環境)
 1. DBeverをインストール
@@ -91,19 +92,19 @@
   - 本番環境のサーバーなので、不用意にファイルをいじらないよう注意
 
 ## URL(ローカル)
-  ### 生徒アカウント
+  #### 生徒アカウント
   - http://localhost/learning-support-app/login.php
-  ### 管理者アカウント
+  #### 管理者アカウント
   - http://localhost/learning-support-app/director/login_director.php
 
 ## URL(AWS本番環境)
-  ### 生徒アカウント
+  #### 生徒アカウント
   - https://wordsystemforlearning.com/login.php
-  ### 管理者アカウント
+  #### 管理者アカウント
   - https://wordsystemforlearning.com/director/login_director.php
 
 ## テーブル一覧
-### info_account: 生徒アカウントの情報
+#### info_account: 生徒アカウントの情報
   - user_name(varchar): ユーザー名
   - login_id(varchar): ログインID
   - user_pass(varchar): パスワード
@@ -111,32 +112,32 @@
   - memo(varchar): メモ帳内容
   - countdown_title(varchar): カウントダウン(タイトル)
   - countdown_date(date): カウントダウン(yyyy-MM-dd)
-### info_director: 管理者アカウントの情報
+#### info_director: 管理者アカウントの情報
   - director_id(varchar): 管理者ID
   - director_name(varchar): 管理者名
   - director_pass(varchar): パスワード
   - table_id(int): 管理者識別番号
-### info_feedback: 復習リストの情報
+#### info_feedback: 復習リストの情報
   - table_id(int): ユーザー識別番号
   - book_id(varchar): テキストID
   - question_number(int): 問題番号
-### info_my_book_index: My単語帳の情報(基本データ)
+#### info_my_book_index: My単語帳の情報(基本データ)
   - table_id(int): ユーザー識別番号
   - book_id(varchar): テキストID
   - book_name(varchar): テキスト名
   - memo(varchar): 目次内容
-### info_my_book_data: My単語帳の情報(単語データ)
+#### info_my_book_data: My単語帳の情報(単語データ)
   - table_id(int): ユーザー識別番号
   - book_id(varchar): テキストID
   - word(varchar): 問題
   - answer(varchar): 解答
   - question_number(int): 問題番号
-### info_notice: お知らせの情報
+#### info_notice: お知らせの情報
   - id(int): お知らせ番号
   - title(varchar): タイトル
   - date(date): 通知日(yyyy-MM-dd)
   - detail(varchar): お知らせ詳細
-### info_image: 管理者が登録したスタンプの情報
+#### info_image: 管理者が登録したスタンプの情報
   - table_id(int): 管理者識別番号
   - img_id(int): スタンプID(QRコードの識別用)
   - stamp_id(varchar): スタンプID(スタンプ画像の識別用)
@@ -145,13 +146,45 @@
   - img_title(varchar): スタンプのタイトル
   - date_limit(date): 有効期限
   - stamp_state(varchar): スタンプ取得の可否
-### info_stamp: ユーザーが獲得したスタンプの情報
+#### info_stamp: ユーザーが獲得したスタンプの情報
   - id(int): スタンプ番号
   - user_table_id(int): 獲得した生徒の識別番号
   - director_table_id(int): 作成した管理者の識別番号
   - img_id(int): スタンプの識別番号
   - stamp_id(varchar): スタンプ画像の識別番号
   - get_date(date): スタンプ獲得日時(yyyy-MM-dd)
+#### 単語帳データ(パターン1)
+  - id(int): 通し番号
+  - word(varchar): 問題
+  - answer(varchar): 解答
+#### 単語帳データ(パターン2)
+  - id(int): 通し番号
+  - word(varchar): 問題
+  - select1(varchar): 選択肢1
+  - select2(varchar): 選択肢2
+  - select3(varchar): 選択肢3
+  - select4(varchar): 選択肢4
+  - answer(varchar): 解答
+  - type(int): 出題形式
+
+## 単語帳データのテーブル名(パターン)
+  - target_1400(1)
+  - target_1900(1)
+  - system_English(1)
+  - rapid_Reading(1)
+  - Vintage(2)
+  - pass_3(1)
+  - pass_pre2(1)
+  - pass_2(1)
+  - pass_pre1(1)
+  - pass_1(1)
+  - get_Through_2600(1)
+  - meiko_original_1(1)
+  - meiko_original_2(2)
+  - gold_phrase(1)
+  - kobun300(1)
+  - kobun315(1)
+  - kobun330(1)
 
 ## バナー通知管理コード
   - 0: 未登録アカウント（ログイン画面）
